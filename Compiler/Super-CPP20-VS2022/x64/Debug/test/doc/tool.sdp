@@ -1,0 +1,21 @@
+#prefix tool_
+
+#define_pro add($a:int, $b:int)
+{
+	;-
+	- 返回2个整数的 和
+	-;
+	return $a + $b
+}
+
+#define_pro get_str_length($str:string)
+{
+	; 获取字符串长度
+	return #get($str, size)
+}
+
+#export
+{
+	add,
+	get_str_length
+}

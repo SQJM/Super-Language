@@ -1,0 +1,2 @@
+ llc -filetype=obj -O3 -o main.obj main.ll
+ lld-link /entry:main /out:output.exe main.obj ucrt.lib vcruntime.lib kernel32.lib

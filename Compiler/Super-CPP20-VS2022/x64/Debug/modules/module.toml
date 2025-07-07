@@ -1,0 +1,8 @@
+[module]
+modules=[
+    "super-std"
+]
+
+[modules.super-std]
+name="std"
+version="1.0.0"

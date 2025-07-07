@@ -1,0 +1,14 @@
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\main.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\main.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\global_data.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\global_data.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\extract_token.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\extract_token.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\parenthesis.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\parenthesis.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\remove_note.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\remove_note.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\llvm\ir.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\ir.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\error.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\error.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\info.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\info.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\keyword.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\keyword.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\tool\command_parsing.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\command_parsing.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\tool\file.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\file.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\tool\string.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\string.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\type\ast.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\ast.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\type\token_name.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\token_name.obj

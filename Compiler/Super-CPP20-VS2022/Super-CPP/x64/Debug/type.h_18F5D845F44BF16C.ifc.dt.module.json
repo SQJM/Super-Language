@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\type.obj",
+            "outputs": [
+                "x64\\Debug\\type.h_18F5D845F44BF16C.ifc.dt.module.json",
+                "x64\\Debug\\type.h_18F5D845F44BF16C.ifc.dt.d.json",
+                "x64\\Debug\\type.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\sqjm\\Desktop\\Super-CPP\\Super-CPP\\keyword\\type.h",
+                    "source-path": "c:\\users\\sqjm\\desktop\\super-cpp\\super-cpp\\keyword\\type.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
