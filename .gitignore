@@ -9,4 +9,6 @@
 
 # 忽略编译生成的文件
 /Compiler/Super-CPP20-VS2022/Super-CPP/x64/
-Super-CPP.pdb
+
+# 忽略编译生成的文件
+/Compiler/Super-CPP20-VS2022/x64/Debug/Super-CPP.pdb
