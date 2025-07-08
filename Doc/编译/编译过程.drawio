@@ -4,9 +4,6 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2mUO1VsIVxacZMf1Uv3O-242" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1122" y="501" width="228" height="500.75" as="geometry" />
-        </mxCell>
         <mxCell id="2mUO1VsIVxacZMf1Uv3O-189" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="2mUO1VsIVxacZMf1Uv3O-9" target="2mUO1VsIVxacZMf1Uv3O-188" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -275,21 +272,6 @@
         </mxCell>
         <mxCell id="2mUO1VsIVxacZMf1Uv3O-229" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;提取Token&lt;/span&gt;" style="html=1;whiteSpace=wrap;fontSize=28;" parent="1" vertex="1">
           <mxGeometry x="629" y="3" width="210" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="2mUO1VsIVxacZMf1Uv3O-237" value="A词法分析" style="html=1;whiteSpace=wrap;fontSize=28;align=left;" parent="1" vertex="1">
-          <mxGeometry x="1135" y="525.75" width="200" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="2mUO1VsIVxacZMf1Uv3O-238" value="&lt;font&gt;B宏过程&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontSize=28;align=left;" parent="1" vertex="1">
-          <mxGeometry x="1135" y="620.75" width="200" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="2mUO1VsIVxacZMf1Uv3O-239" value="&lt;font&gt;C高级宏过程&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontSize=28;align=left;" parent="1" vertex="1">
-          <mxGeometry x="1135" y="717.75" width="200" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="2mUO1VsIVxacZMf1Uv3O-240" value="&lt;font&gt;D宏展开&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontSize=28;align=left;" parent="1" vertex="1">
-          <mxGeometry x="1135" y="825.75" width="200" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="2mUO1VsIVxacZMf1Uv3O-241" value="&lt;font&gt;E高级宏展开&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontSize=28;align=left;" parent="1" vertex="1">
-          <mxGeometry x="1135" y="926.75" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="CVecepeYsr_i7JUgzHfF-22" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1029" y="-534" width="445" height="531" as="geometry" />

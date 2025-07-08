@@ -32,7 +32,8 @@ namespace Super::Compile::LLVM
 			throw std::runtime_error("没有提取到 Token");
 		}
 
-		//Super::Compile::LexicalAnalysis::Parenthesis(_inputFilePath, _tokens);
+		// 括号匹配
+		Super::Compile::LexicalAnalysis::Parenthesis(_inputFilePath, _tokens);
 
 		std::cout << Super::Tool::String::TokenToString(_tokens) << std::endl;
 		std::cout << "Define List\n" << Super::Tool::String::DictionaryStringToString(Super::Compile::GlobalData::FileCompileDataList[_inputFilePath].Define) << std::endl;

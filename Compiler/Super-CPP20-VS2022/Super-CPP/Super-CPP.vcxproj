@@ -137,7 +137,8 @@
     <ClCompile Include="src\compile\global_data.cpp" />
     <ClCompile Include="src\compile\lexical_analysis\extract_token.cpp" />
     <ClCompile Include="src\compile\lexical_analysis\parenthesis.cpp" />
-    <ClCompile Include="src\compile\lexical_analysis\remove_note.cpp" />
+    <ClCompile Include="src\compile\lexical_analysis\to_token_ground.cpp" />
+    <ClCompile Include="src\compile\remove_note.cpp" />
     <ClCompile Include="src\compile\llvm\ir.cpp" />
     <ClCompile Include="src\error.cpp" />
     <ClCompile Include="src\info.cpp" />
@@ -152,7 +153,8 @@
     <ClInclude Include="include\super\compile\global_data.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\extract_token.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\parenthesis.h" />
-    <ClInclude Include="include\super\compile\lexical_analysis\remove_note.h" />
+    <ClInclude Include="include\super\compile\lexical_analysis\to_token_ground.h" />
+    <ClInclude Include="include\super\compile\remove_note.h" />
     <ClInclude Include="include\super\compile\llvm\ir.h" />
     <ClInclude Include="include\super\error.h" />
     <ClInclude Include="include\super\info.h" />

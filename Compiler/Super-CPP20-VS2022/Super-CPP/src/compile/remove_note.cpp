@@ -1,4 +1,4 @@
-﻿#include <super/compile/lexical_analysis/remove_note.h>
+﻿#include <super/compile/remove_note.h>
 #include <sstream>
 #include <iostream>
 
