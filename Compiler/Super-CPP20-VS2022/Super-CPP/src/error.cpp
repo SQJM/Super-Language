@@ -5,7 +5,8 @@
 
 namespace Super::Error
 {
-	std::unordered_map<std::wstring, std::wstring> A = {
+	std::unordered_map<std::wstring, std::wstring> A = 
+	{
 		{L"000000", L"不能使用内置关键字作为宏"},
 		{L"000010", L"不完整的宏定义"},
 		{L"000020", L"不能使用内置关键字作为宏来解除"},
@@ -35,7 +36,9 @@ namespace Super::Error
 		{L"400020", L"符号不连续"},
 		{L"400030", L"修饰关键字不能放在类型关键字后面"},
 		{L"400040", L"多个变量名"},
-		{L"400050", L"变量的声明不允许此符号"}
+		{L"400050", L"变量的声明不允许此符号"},
+		{L"400060", L"未知符号"},
+		{L"400070", L"未知 Token"}
 	};
 
 	void NewError(const std::wstring& file, const std::wstring& msg, const Super::Type::Token& token)

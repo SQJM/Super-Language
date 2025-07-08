@@ -6,33 +6,33 @@ namespace Super::Type
     {
         switch (name)
         {
-        case None: return L"None";
-        case Null: return L"Null";
-        case TypeKeywords: return L"TypeKeywords";
-        case ModifierKeyword: return L"ModifierKeyword";
-        case OtherKeywords: return L"OtherKeywords";
-        case ControlFlowKeywords: return L"ControlFlowKeywords";
-        case PreprocessingInstructions: return L"PreprocessingInstructions";
-        case DefineName: return L"DefineName";
-        case DefineValue: return L"DefineValue";
-        case DefinePro: return L"DefinePro";
-        case Symbols: return L"Symbols";
-        case UpperNumberSymbols: return L"UpperNumberSymbols";
-        case String: return L"String";
-        case Char: return L"Char";
-        case VarName: return L"VarName";
-        case FunctionName: return L"FunctionName";
-        case Pointer: return L"Pointer";
-        case PriorityParenthesesLeft: return L"PriorityParenthesesLeft";
-        case PriorityParenthesesRight: return L"PriorityParenthesesRight";
-        case DeclarationFunctionalParenthesesLeft: return L"DeclarationFunctionalParenthesesLeft";
-        case DeclarationFunctionalParenthesesRight: return L"DeclarationFunctionalParenthesesRight";
-        case DefinitionFunctionalParenthesesLeft: return L"DefinitionFunctionalParenthesesLeft";
-        case DefinitionFunctionalParenthesesRight: return L"DefinitionFunctionalParenthesesRight";
-        case CallFunctionParenthesesLeft: return L"CallFunctionParenthesesLeft";
-        case CallFunctionParenthesesRight: return L"CallFunctionParenthesesRight";
-        case KeywordCallsFunctionParenthesesLeft: return L"KeywordCallsFunctionParenthesesLeft";
-        case KeywordCallsFunctionParenthesesRight: return L"KeywordCallsFunctionParenthesesRight";
+        case TokenName::None: return L"None";
+        case TokenName::Null: return L"Null";
+        case TokenName::TypeKeywords: return L"TypeKeywords";
+        case TokenName::ModifierKeyword: return L"ModifierKeyword";
+        case TokenName::OtherKeywords: return L"OtherKeywords";
+        case TokenName::ControlFlowKeywords: return L"ControlFlowKeywords";
+        case TokenName::PreprocessingInstructions: return L"PreprocessingInstructions";
+        case TokenName::DefineName: return L"DefineName";
+        case TokenName::DefineValue: return L"DefineValue";
+        case TokenName::DefinePro: return L"DefinePro";
+        case TokenName::Symbols: return L"Symbols";
+        case TokenName::UpperNumberSymbols: return L"UpperNumberSymbols";
+        case TokenName::String: return L"String";
+        case TokenName::Char: return L"Char";
+        case TokenName::VarName: return L"VarName";
+        case TokenName::FunctionName: return L"FunctionName";
+        case TokenName::Pointer: return L"Pointer";
+        case TokenName::PriorityParenthesesLeft: return L"PriorityParenthesesLeft";
+        case TokenName::PriorityParenthesesRight: return L"PriorityParenthesesRight";
+        case TokenName::DeclarationFunctionalParenthesesLeft: return L"DeclarationFunctionalParenthesesLeft";
+        case TokenName::DeclarationFunctionalParenthesesRight: return L"DeclarationFunctionalParenthesesRight";
+        case TokenName::DefinitionFunctionalParenthesesLeft: return L"DefinitionFunctionalParenthesesLeft";
+        case TokenName::DefinitionFunctionalParenthesesRight: return L"DefinitionFunctionalParenthesesRight";
+        case TokenName::CallFunctionParenthesesLeft: return L"CallFunctionParenthesesLeft";
+        case TokenName::CallFunctionParenthesesRight: return L"CallFunctionParenthesesRight";
+        case TokenName::KeywordCallsFunctionParenthesesLeft: return L"KeywordCallsFunctionParenthesesLeft";
+        case TokenName::KeywordCallsFunctionParenthesesRight: return L"KeywordCallsFunctionParenthesesRight";
         default: return L"Unknown";
         }
     }

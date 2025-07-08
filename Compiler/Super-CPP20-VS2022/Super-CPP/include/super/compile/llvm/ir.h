@@ -14,7 +14,6 @@ namespace Super::Compile::LLVM
     {
     private:
         std::wstring _inputFilePath;
-        std::vector<Super::Type::Token> _tokens;
         Super::Type::AST _ast;
 
     public:

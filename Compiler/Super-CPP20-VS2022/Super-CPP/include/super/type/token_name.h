@@ -3,7 +3,7 @@
 
 namespace Super::Type
 {
-	enum TokenName
+	enum class TokenName
 	{
 		None,
 		Null,

@@ -139,6 +139,7 @@
     <ClCompile Include="src\compile\lexical_analysis\extract_token.cpp" />
     <ClCompile Include="src\compile\lexical_analysis\parenthesis.cpp" />
     <ClCompile Include="src\compile\lexical_analysis\to_token_ground.cpp" />
+    <ClCompile Include="src\compile\lexical_analysis\to_token_group.cpp" />
     <ClCompile Include="src\compile\remove_note.cpp" />
     <ClCompile Include="src\compile\llvm\ir.cpp" />
     <ClCompile Include="src\error.cpp" />
@@ -152,11 +153,12 @@
     <ClCompile Include="src\type\token_name.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\super\compile\lexical_analysis\to_token_group.h" />
     <ClInclude Include="include\super\config.h" />
     <ClInclude Include="include\super\compile\global_data.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\extract_token.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\parenthesis.h" />
-    <ClInclude Include="include\super\compile\lexical_analysis\to_token_ground.h" />
+    <ClInclude Include="include\super\compile\lexical_analysis\to_token_group.h" />
     <ClInclude Include="include\super\compile\remove_note.h" />
     <ClInclude Include="include\super\compile\llvm\ir.h" />
     <ClInclude Include="include\super\error.h" />
@@ -168,6 +170,8 @@
     <ClInclude Include="include\super\tool\string.h" />
     <ClInclude Include="include\super\type\ast.h" />
     <ClInclude Include="include\super\type\token.h" />
+    <ClInclude Include="include\super\type\token_group.h" />
+    <ClInclude Include="include\super\type\token_grup_name.h" />
     <ClInclude Include="include\super\type\token_name.h" />
     <ClInclude Include="Super\include\compile\global_data.h" />
     <ClInclude Include="Super\include\compile\lexical_analysis\extract_token.h" />
