@@ -1,8 +1,0 @@
-﻿  extract_token.cpp
-C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\env\icu4c-77_1-Win64-MSVC2022\include\unicode\stringoptions.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  (编译源文件“src/compile/lexical_analysis/extract_token.cpp”)
-  
-C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\env\icu4c-77_1-Win64-MSVC2022\include\unicode\uchar.h(3178,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  (编译源文件“src/compile/lexical_analysis/extract_token.cpp”)
-  
-  Super-CPP.vcxproj -> C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\x64\Debug\Super-CPP.exe
