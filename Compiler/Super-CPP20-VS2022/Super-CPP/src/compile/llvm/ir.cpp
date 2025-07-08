@@ -23,7 +23,7 @@ namespace Super::Compile::LLVM
 		Super::Compile::GlobalData::FileDataList[_inputFilePath] = 
 			Super::Compile::RemoveNote(fileContent).GetData();
 
-		std::wcout << Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[_inputFilePath]) << std::endl;
+		//std::wcout << Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[_inputFilePath]) << std::endl;
 
 		// 词法分析
 		_tokens = Super::Compile::LexicalAnalysis::ExtractToken(_inputFilePath).GetTokenStream();
@@ -37,7 +37,8 @@ namespace Super::Compile::LLVM
 		Super::Compile::LexicalAnalysis::Parenthesis(_inputFilePath, _tokens);
 
 		std::wcout << Super::Tool::String::TokenToString(_tokens) << std::endl;
-		std::wcout << L"Define List\n" << Super::Tool::String::DictionaryStringToString(Super::Compile::GlobalData::FileCompileDataList[_inputFilePath].Define) << std::endl;
+		std::wcout << L"Define List\n"
+			<< Super::Tool::String::DictionaryStringToString(Super::Compile::GlobalData::FileCompileDataList[_inputFilePath].Define) << std::endl;
 	}
 
 	std::wstring IR::Data()
