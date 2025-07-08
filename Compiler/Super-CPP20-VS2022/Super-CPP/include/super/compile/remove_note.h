@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-namespace Super::Compile::LexicalAnalysis
+namespace Super::Compile
 {
 	class RemoveNote
 	{

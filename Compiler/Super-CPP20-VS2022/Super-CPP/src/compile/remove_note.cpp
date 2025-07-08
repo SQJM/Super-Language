@@ -2,7 +2,7 @@
 #include <sstream>
 #include <iostream>
 
-namespace Super::Compile::LexicalAnalysis
+namespace Super::Compile
 {
 	RemoveNote::RemoveNote(const std::string& fileData)
 	{

@@ -2,7 +2,7 @@
 #include <super/compile/global_data.h>
 #include <super/compile/lexical_analysis/extract_token.h>
 #include <super/tool/string.h>
-#include <super/compile/lexical_analysis/remove_note.h>
+#include <super/compile/remove_note.h>
 #include <iostream>
 #include <super/compile/lexical_analysis/parenthesis.h>
 #include <super/tool/file.h>
@@ -20,7 +20,8 @@ namespace Super::Compile::LLVM
 		std::string fileContent = Super::Tool::File::ReadFileAllContent(_inputFilePath);
 
 		// 去除注释
-		Super::Compile::GlobalData::FileDataList[_inputFilePath] = Super::Compile::LexicalAnalysis::RemoveNote(fileContent).GetData();
+		Super::Compile::GlobalData::FileDataList[_inputFilePath] = 
+			Super::Compile::RemoveNote(fileContent).GetData();
 
 		//std::cout <<Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[_inputFilePath]) << std::endl;
 
