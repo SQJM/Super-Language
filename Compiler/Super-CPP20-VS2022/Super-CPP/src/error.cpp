@@ -1,6 +1,7 @@
 ﻿#include <super/error.h>
 #include <super/compile/global_data.h>
 #include <super/tool/string.h>
+#include <super\info.h>
 
 namespace Super::Error
 {
@@ -50,9 +51,14 @@ namespace Super::Error
 		return head + body + "\n" + indicate;
 	}
 
+	static std::exception CreateError(const std::string& msg)
+	{
+		return std::runtime_error(msg+"\nSuper "+ Super::Info::Version);
+	}
+
 	std::exception NewError(const std::string& file, const std::string& msg, const Super::Type::Token& token)
 	{
-		return std::runtime_error(AddIndicate(file, token) + "\n" + msg);
+		return CreateError(AddIndicate(file, token) + "\n" + msg);
 	}
 
 	std::exception NewError(const std::string& file, const std::string& msg, const std::vector<Super::Type::Token>& tokens)
@@ -62,11 +68,11 @@ namespace Super::Error
 		{
 			result << AddIndicate(file, token) << "\n";
 		}
-		return std::runtime_error(result.str() + msg);
+		return CreateError(result.str() + msg);
 	}
 
 	std::exception NewError(const std::string& msg)
 	{
-		return std::runtime_error(msg);
+		return CreateError(msg);
 	}
 }

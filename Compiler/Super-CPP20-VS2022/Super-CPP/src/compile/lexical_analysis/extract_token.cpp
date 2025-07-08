@@ -158,6 +158,10 @@ namespace Super::Compile::LexicalAnalysis
 
 				if (c == '\n')
 				{
+					if (isStringOrCharStart)
+					{
+						SUPER_ERROR_A(inputFilePath, "100000", Super::Type::Token(i + 1, j, tokenName, ""));
+					}
 					AddTokens(i, j, tokenName, temp);
 					upString = false;
 					break;

@@ -57,12 +57,10 @@ namespace Super::Compile::LexicalAnalysis
             while (!stack.empty())
             {
                 const auto& token = stack.top();
-                stack.pop();
-                std::cout<<
-					"Error: " << token.value << " at line " << token.line << ", column " << token.column << std::endl;
                 auto& msg = Super::Error::A[errorMessages[token.value]];
                 result << Super::Error::AddIndicate(inputFilePath, token) << "\n"
                     << msg << "\n";
+                stack.pop();
             }
             SUPER_ERROR_MSG(result.str());
         }

@@ -2,7 +2,8 @@ C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\main.
 C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\global_data.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\global_data.obj
 C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\extract_token.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\extract_token.obj
 C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\parenthesis.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\parenthesis.obj
-C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\remove_note.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\remove_note.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\lexical_analysis\to_token_ground.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\to_token_ground.obj
+C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\remove_note.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\remove_note.obj
 C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\compile\llvm\ir.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\ir.obj
 C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\error.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\error.obj
 C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\src\info.cpp;C:\Users\sqjm\Desktop\Super-Language\Compiler\Super-CPP20-VS2022\Super-CPP\x64\Debug\info.obj

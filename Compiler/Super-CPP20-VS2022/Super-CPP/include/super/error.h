@@ -4,15 +4,23 @@
 #include <stdexcept>
 #include <sstream>
 #include <super/type/token.h>
+#include <super/config.h>
+
+#if SUPER_DEBUG == 1
+#define SUPER_ERROR_SHOW_FILE_LINE __FILE__ + ":" + std::to_string(__LINE__)
+#endif
+#if SUPER_DEBUG == 0
+#define SUPER_ERROR_SHOW_FILE_LINE ""
+#endif
 
 #define SUPER_ERROR(file, msg, token) \
-	throw Super::Error::NewError(file, msg + "\n" + __FILE__ + ":" + std::to_string(__LINE__), token)
+	throw Super::Error::NewError(file, msg + "\n" + SUPER_ERROR_SHOW_FILE_LINE, token)
 
 #define SUPER_ERROR_A(file, code, token) \
-	throw Super::Error::NewError(file, Super::Error::A[code] + "\n" + __FILE__ + ":" + std::to_string(__LINE__), token)
+	throw Super::Error::NewError(file, Super::Error::A[code] + "\n" + SUPER_ERROR_SHOW_FILE_LINE, token)
 
 #define SUPER_ERROR_MSG(msg) \
-	throw Super::Error::NewError(msg + "\n" + __FILE__ + ":" + std::to_string(__LINE__))
+	throw Super::Error::NewError(msg + "\n" + SUPER_ERROR_SHOW_FILE_LINE)
 
 namespace Super::Error
 {

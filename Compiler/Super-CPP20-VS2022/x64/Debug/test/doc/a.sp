@@ -37,8 +37,8 @@ string ddaaaan = "gf"
 #ifdef a
 string ddaa = "gf"
 #endif
-;void hello)"
-;[[分]]]'
+void hello)"
+[[分]]]
 void hello()
 
 int& kk()
@@ -46,7 +46,7 @@ int& kk()
 	int a = 1
 	return &a
 }
-[
+
 void hello()
 {
 	std::print("hello")
