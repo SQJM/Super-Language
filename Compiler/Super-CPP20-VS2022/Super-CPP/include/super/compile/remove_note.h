@@ -7,9 +7,9 @@ namespace Super::Compile
 	class RemoveNote
 	{
 	private:
-		std::vector<std::string> _data;
+		std::vector<std::wstring> _data;
 	public:
-		RemoveNote(const std::string& fileData);
-		std::vector<std::string> GetData() const;
+		RemoveNote(const std::wstring& fileData);
+		std::vector<std::wstring> GetData() const;
 	};
 }

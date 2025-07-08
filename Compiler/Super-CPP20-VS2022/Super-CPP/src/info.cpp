@@ -3,13 +3,13 @@
 
 namespace Super::Info
 {
-	std::string GetVersionInfo()
+	std::wstring GetVersionInfo()
 	{
 		return
-			"Version: " + Version + "\n" +
-			"Version Code: " + std::to_string(VersionCode) + "\n" +
-			"Build Type: " + VersionBuildType + "\n" +
-			"Build Date: " + BuildDate + "\n" +
-			"Short: " + VersionBuildType.substr(0, 1) + std::to_string(VersionCode).substr(0, 2);
+			L"Version: " + Version + L"\n" +
+			L"Version Code: " + std::to_wstring(VersionCode) + L"\n" +
+			L"Build Type: " + VersionBuildType + L"\n" +
+			L"Build Date: " + BuildDate + L"\n" +
+			L"Short: " + VersionBuildType.substr(0, 1) + std::to_wstring(VersionCode).substr(0, 2);
 	}
 }

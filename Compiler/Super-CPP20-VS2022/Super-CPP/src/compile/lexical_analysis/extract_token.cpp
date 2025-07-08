@@ -8,9 +8,9 @@
 
 namespace Super::Compile::LexicalAnalysis
 {
-	void ExtractToken::AddTokens(size_t line, size_t column, Super::Type::TokenName& tokenName, std::ostringstream& v)
+	void ExtractToken::AddTokens(size_t line, size_t column, Super::Type::TokenName& tokenName, std::wostringstream& v)
 	{
-		std::string value = v.str();
+		std::wstring value = v.str();
 		if (value.size() > 0 && !value.empty())
 		{
 			if (tokenName == Super::Type::TokenName::String || tokenName == Super::Type::TokenName::Char)
@@ -44,15 +44,15 @@ namespace Super::Compile::LexicalAnalysis
 			else if (Super::Keyword::Contains(value, Super::Keyword::PreprocessingInstructions))
 			{
 				tokenName = Super::Type::TokenName::PreprocessingInstructions;
-				if (value == "#define")
+				if (value == L"#define")
 				{
 					isDefineName = true;
 					goto end;
 				}
 				else if (
-					value == "#undef"
-					|| value == "#ifdef"
-					|| value == "#ifndef"
+					value == L"#undef"
+					|| value == L"#ifdef"
+					|| value == L"#ifndef"
 					)
 				{
 					isSetDefineName = true;
@@ -74,45 +74,77 @@ namespace Super::Compile::LexicalAnalysis
 		end:
 			tokens.emplace_back(line + 1, column, tokenName, value);
 			tokenName = Super::Type::TokenName::None;
-			v.str("");
+			v.str(L"");
 		}
 	}
 
 	void ExtractToken::ClearNullToken()
 	{
 		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token& token)
-			{
-				return token.name == Super::Type::TokenName::Null;
-			}),
-			tokens.end());
+									{
+										return token.name == Super::Type::TokenName::Null;
+									}),
+					 tokens.end());
 	}
 
-	ExtractToken::ExtractToken(const std::string& inputFilePath)
+	void ExtractToken::ProcessStrings(size_t& l, size_t& i, const std::vector<wchar_t>& lineData, std::wostringstream& temp, const Super::Type::TokenName& tokenName)
 	{
-		std::vector<std::string> data = Super::Compile::GlobalData::FileDataList[inputFilePath];
-		std::string line;
-
-		std::ostringstream temp;
 		bool escape = false;
-		bool isStringOrCharStart = false;
-		int state = 0; // 0:普通代码 1:字符串
-		bool upString = false;
+		i++;
+		for (; i < lineData.size(); i++)
+		{
+			wchar_t c = lineData[i];
+
+			if (c == L'\n' && (temp.str().size() == 0 || temp.str().empty()))
+			{
+				SUPER_ERROR_THROW_A(inputFilePath, L"100000", Super::Type::Token(l + 1, i, tokenName, L""));
+			}
+
+			if (escape)
+			{
+				temp << c;
+				escape = false;
+			}
+			else
+			{
+				if (c == L'\\' && !escape)
+				{
+					// 遇到转义符
+					escape = true;
+				}
+				else if ((c == L'"' || c == L'\'') && !escape)
+				{
+					temp << c;
+					return;
+				}
+				temp << c;
+			}
+		}
+	}
+
+	ExtractToken::ExtractToken(const std::wstring& path)
+	{
+		inputFilePath = path;
+		std::vector<std::wstring> data = Super::Compile::GlobalData::FileDataList[inputFilePath];
+		std::wstring line;
+
+		std::wostringstream temp;
 		bool isContinueLineToOneToken = false;
 		Super::Type::TokenName tokenName = Super::Type::TokenName::None;
 
 		// 提取 Token
 		for (size_t i = 0; i < data.size(); i++)
 		{
-			std::vector<char> lineData(data[i].begin(), data[i].end());
+			std::vector<wchar_t> lineData(data[i].begin(), data[i].end());
 			if (lineData.empty())
 			{
 				continue;
 			}
 			size_t lineLength = lineData.size();
-			lineData[lineLength-1] = '\n';
+			lineData[lineLength - 1] = L'\n';
 			for (size_t j = 0; j < lineLength; j++)
 			{
-				char c = lineData[j];
+				wchar_t c = lineData[j];
 				if (isLineToOneToken)
 				{
 					if (isContinueLineToOneToken)
@@ -120,12 +152,12 @@ namespace Super::Compile::LexicalAnalysis
 						isContinueLineToOneToken = false;
 						continue;
 					}
-					if (c == '\\' && lineData[j+1] == '\n')
+					if (c == L'\\' && lineData[j + 1] == L'\n')
 					{
 						isContinueLineToOneToken = true;
 						continue;
 					}
-					else if (!isContinueLineToOneToken && c == '\n')
+					else if (!isContinueLineToOneToken && c == L'\n')
 					{
 						AddTokens(i, j, tokenName, temp);
 						isLineToOneToken = false;
@@ -134,87 +166,48 @@ namespace Super::Compile::LexicalAnalysis
 					temp << c;
 					continue;
 				}
-				if (isStringOrCharStart)
-				{
-					isStringOrCharStart = false;
-				}
-				if (upString && !Super::Tool::String::IsWhitespace(c))
-				{
-					if (!Super::Keyword::Contains(c, Super::Keyword::SplitSymbols))
-					{
-						SUPER_ERROR_A(inputFilePath, "100000", Super::Type::Token(i + 1, j, tokenName, ""));
-					}
-					else
-					{
-						upString = false;
-					}
-				}
 
-				if (state == 0 && (c == '"' || c == '\''))
+				if (c == L'"' || c == L'\'')
 				{
-					state = 1;
-					isStringOrCharStart = true;
-				}
-
-				if (c == '\n')
-				{
-					if (isStringOrCharStart)
+					if (lineData[j + 1] == L'\n')
 					{
-						SUPER_ERROR_A(inputFilePath, "100000", Super::Type::Token(i + 1, j, tokenName, ""));
+						SUPER_ERROR_THROW_A(inputFilePath, L"100000", Super::Type::Token(i + 1, j + 1, tokenName, L""));
 					}
 					AddTokens(i, j, tokenName, temp);
-					upString = false;
+					temp << c;
+					if (c == L'"')
+						tokenName = Super::Type::TokenName::String;
+					else if (c == L'\'')
+						tokenName = Super::Type::TokenName::Char;
+					ProcessStrings(i, j, lineData, temp, tokenName);
+					continue;
+				}
+
+				if (c == L'\n')
+				{
+					AddTokens(i, j, tokenName, temp);
 					break;
 				}
-				else if (state != 1 && Super::Tool::String::IsWhitespace(c))
+				else if (Super::Tool::String::IsWhitespace(c))
 				{
 					AddTokens(i, j, tokenName, temp);
 					continue;
 				}
-				else if (state == 0 && Super::Keyword::Contains(lineData[j], Super::Keyword::SplitSymbols))
+				else if (Super::Keyword::Contains(lineData[j], Super::Keyword::Symbols))
 				{
 					AddTokens(i, j, tokenName, temp);
 					tokenName = Super::Type::TokenName::Symbols;
 					temp << c;
 					continue;
 				}
-				else if (tokenName == Super::Type::TokenName::Symbols && !Super::Keyword::Contains(lineData[j], Super::Keyword::SplitSymbols))
+				else if (tokenName == Super::Type::TokenName::Symbols && !Super::Keyword::Contains(lineData[j], Super::Keyword::Symbols))
 				{
 					AddTokens(i, j, tokenName, temp);
 					temp << c;
 					continue;
 				}
 
-				if (state == 1 && isStringOrCharStart && c == '"')
-					tokenName = Super::Type::TokenName::String;
-				else if (state == 1 && isStringOrCharStart && c == '\'')
-					tokenName = Super::Type::TokenName::Char;
-
-				if (escape)
-				{
-					temp << c;
-					escape = false;
-				}
-				else
-				{
-					if (state == 0)
-					{
-						temp << c;
-					}
-					else if (state == 1)
-					{
-						if (c == '\\' && !escape)
-						{ // 遇到转义符
-							escape = true;
-						}
-						else if (!isStringOrCharStart && (c == '"' || c == '\'') && !escape)
-						{ // 遇到字符串结束
-							state = 0;
-							upString = true;
-						}
-						temp << c;
-					}
-				}
+				temp << c;
 			}
 		}
 	}

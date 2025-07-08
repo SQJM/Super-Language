@@ -21,7 +21,7 @@ string dfhg = "gg" + "ds"
 #define am 23 4352\
 e2
 
-; 鍙栨秷 am
+; 取消 am
 #undef am
 
 #define a
@@ -37,8 +37,8 @@ string ddaaaan = "gf"
 #ifdef a
 string ddaa = "gf"
 #endif
-void hello)"
-[[鍒哴]]
+;void hell速度发对o)"
+;[[分分]]]
 void hello()
 
 int& kk()
@@ -74,7 +74,7 @@ int main()
 	int sdf = await fn()
 
 	char dd[] = "d\"a1;fd2;"
-	char dd[] = "d\"a1;f涓枃d2;"
+	char dd[] = "d\"a1;f中文d2;"
 
 	static const int d
 
@@ -82,7 +82,7 @@ int main()
 
 	char ccc = 'g'
 
-	int 涓枃 = 1
+	int 中文 = 1
 
 	hello()
 
@@ -102,8 +102,8 @@ int main()
 
 	bool* ptr_bool_var_1 = nullptr
 	;-
-	- 杩欎釜
-	- 娉ㄩ噴 -\;
+	- 这个
+	- 注释 -\;
 	-;
 	int sss = 2
 	return 0

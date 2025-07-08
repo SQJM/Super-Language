@@ -6,129 +6,138 @@
 
 namespace Super::Keyword
 {
-	bool Contains(const std::string& str, const std::vector<std::string>& keywords);
-	bool Contains(const char& c, const char keywords[]);
+	bool Contains(const std::wstring& str, const std::vector<std::wstring>& keywords);
+	bool Contains(const wchar_t& c, const std::vector<std::wstring>& keywords);
 
 	// 修饰符关键字
-	const std::vector<std::string> Modifier =
+	const std::vector<std::wstring> Modifier =
 	{
-		"constexpr",
-		"static",
-		"private", 
-		"public", 
-		"protected",
-		"virtual",
-		"friend", 
-		"operator",
-		"await", 
-		"async",
-		"inline",
-		"const",
-		"unsigned"
+		L"constexpr",
+		L"static",
+		L"private",
+		L"public",
+		L"protected",
+		L"virtual",
+		L"friend",
+		L"operator",
+		L"await",
+		L"async",
+		L"inline",
+		L"const",
+		L"unsigned"
 	};
 
 	// 其他关键字
-	const std::vector<std::string> Other =
+	const std::vector<std::wstring> Other =
 	{
-		"using",
-		"new", 
-		"auto_new", 
-		"delete",
-		"throw",
-		"sizeof",
-		"type_name",
-		"namespace", 
-		"this", 
-		"module",
-		"exports",
-		"export", 
-		"template", 
-		"import", 
-		"type_cast",
-		"direct_cast",
-		"class_cast",
-		"null", 
-		"nullptr"
+		L"using",
+		L"new",
+		L"auto_new",
+		L"delete",
+		L"throw",
+		L"sizeof",
+		L"type_name",
+		L"namespace",
+		L"this",
+		L"module",
+		L"exports",
+		L"export",
+		L"template",
+		L"import",
+		L"type_cast",
+		L"direct_cast",
+		L"class_cast",
+		L"null",
+		L"nullptr"
 	};
 
 	// 类型关键字
-	const std::vector<std::string> TypeKeywords =
+	const std::vector<std::wstring> TypeKeywords =
 	{
-		"void",
-		"bool",
-		"char",
-		"wchar", 
-		"short", 
-		"int",
-		"half",
-		"float",
-		"double", 
-		"typedef", 
-		"class",
-		"union", 
-		"struct",
-		"enum"
+		L"void",
+		L"bool",
+		L"char",
+		L"wchar",
+		L"short",
+		L"int",
+		L"half",
+		L"float",
+		L"double",
+		L"typedef",
+		L"class",
+		L"union",
+		L"struct",
+		L"enum"
 	};
 
 	// 控制流关键字
-	const std::vector<std::string> ControlFlow =
+	const std::vector<std::wstring> ControlFlow =
 	{
-		"if",
-		"else",
-		"elif", 
-		"while", 
-		"for",
-		"do",
-		"loop",
-		"switch",
-		"case",
-		"break",
-		"result", 
-		"match_ok",
-		"match_err", 
-		"match_finally",
-		"continue",
-		"return",
-		"if_return"
+		L"if",
+		L"else",
+		L"elif",
+		L"while",
+		L"for",
+		L"do",
+		L"loop",
+		L"switch",
+		L"case",
+		L"break",
+		L"result",
+		L"match_ok",
+		L"match_err",
+		L"match_finally",
+		L"continue",
+		L"return",
+		L"if_return"
 	};
 
 	// 预处理指令
-	const std::vector<std::string> PreprocessingInstructions =
+	const std::vector<std::wstring> PreprocessingInstructions =
 	{
-		"#define", 
-		"#undef", 
-		"#ifdef", 
-		"#ifndef",
-		"#endif",
-		"#error", 
-		"#message", 
-		"#include_asm",
-		"#import_sdp",
-		"#if",
-		"#elif",
-		"#else"
+		L"#define",
+		L"#undef",
+		L"#ifdef",
+		L"#ifndef",
+		L"#endif",
+		L"#error",
+		L"#message",
+		L"#include_asm",
+		L"#import_sdp",
+		L"#if",
+		L"#elif",
+		L"#else"
 	};
 
 	// 高级宏
-	const std::vector<std::string> DefinePro =
+	const std::vector<std::wstring> DefinePro =
 	{
-		"#define_pro",
-		"#edit",
-		"#get",
-		"#type",
-		"#error",
-		"#message", 
-		"#export"
+		L"#define_pro",
+		L"#edit",
+		L"#get",
+		L"#type",
+		L"#error",
+		L"#message",
+		L"#export"
 	};
 
 	// 数字字符
-	const char Number[] =
+	const std::vector<std::wstring> Number =
 	{
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+		L"0",
+		L"1",
+		L"2",
+		L"3",
+		L"4",
+		L"5",
+		L"6",
+		L"7",
+		L"8",
+		L"9"
 	};
 
 	// 符号枚举类
-	enum class Symbols
+	enum class SymbolsEnum
 	{
 		Dollar = '$',
 		DoubleQuote = '"',
@@ -163,17 +172,66 @@ namespace Super::Keyword
 		Underscore = '_'
 	};
 
-	// 分割符号
-	const char SplitSymbols[] =
+	// 符号
+	const std::vector<std::wstring> Symbols =
 	{
-		'!', '-', '+', '/', '*', '=', '\\', '[', ']',
-		'{', '}', '.', ':', '?', '(', ')', '|', '^',
-		'&', '%', '<', '>', ',', ';', '~', '@', '$'
+		L"$",
+		L"\"",
+		L"'",
+		L"!",
+		L"-",
+		L"+",
+		L"/",
+		L"*",
+		L"=",
+		L"\\",
+		L"[",
+		L"]",
+		L"{",
+		L"}",
+		L".",
+		L":",
+		L"?",
+		L"(",
+		L")",
+		L"|",
+		L"^",
+		L"&",
+		L"%",
+		L"<",
+		L">",
+		L",",
+		L";",
+		L"~",
+		L"@"
+	};
+
+	// 连接符号
+	const std::vector<std::wstring> ConnectSymbols =
+	{
+		L"+"
+	};
+
+	// 分割符号
+	const std::vector<std::wstring> SplitSymbols =
+	{
+		L"-",
+		L"+",
+		L"/",
+		L"*",
+		L"|",
+		L"^",
+		L"&",
+		L"%",
+		L"~"
 	};
 
 	// 特殊符号
-	const char SpecialSymbols[] =
-	{ '#', '_' };
+	const std::vector<std::wstring> SpecialSymbols =
+	{
+		L"#",
+		L"_"
+	};
 
 	// 大写字母枚举类
 	enum class UpperCaseLetters
@@ -198,20 +256,20 @@ namespace Super::Keyword
 	};
 
 	// 辅助函数：检查字符是否为字母
-	inline bool IsLetter(char c)
+	inline bool IsLetter(wchar_t c)
 	{
-		return std::isalpha(static_cast<unsigned char>(c));
+		return std::isalpha(c);
 	}
 
 	// 辅助函数：检查字符是否为数字
-	inline bool IsNumber(char c)
+	inline bool IsNumber(wchar_t c)
 	{
-		return std::isdigit(static_cast<unsigned char>(c));
+		return std::isdigit(c);
 	}
 
 	// 辅助函数：检查字符是否为特定符号
-	inline bool IsSymbol(char c)
+	inline bool IsSymbol(const std::wstring& c, std::vector<std::wstring> cs)
 	{
-		return std::find(std::begin(SplitSymbols), std::end(SplitSymbols), c) != std::end(SplitSymbols);
+		return std::find(cs.begin(), cs.end(), c) != cs.end();
 	}
 }

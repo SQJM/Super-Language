@@ -145,6 +145,7 @@
     <ClCompile Include="src\keyword.cpp" />
     <ClCompile Include="src\tool\command_parsing.cpp" />
     <ClCompile Include="src\tool\file.cpp" />
+    <ClCompile Include="src\tool\log.cpp" />
     <ClCompile Include="src\tool\string.cpp" />
     <ClCompile Include="src\type\ast.cpp" />
     <ClCompile Include="src\type\token_name.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="include\super\keyword.h" />
     <ClInclude Include="include\super\tool\command_parsing.h" />
     <ClInclude Include="include\super\tool\file.h" />
+    <ClInclude Include="include\super\tool\log.h" />
     <ClInclude Include="include\super\tool\string.h" />
     <ClInclude Include="include\super\type\ast.h" />
     <ClInclude Include="include\super\type\token.h" />

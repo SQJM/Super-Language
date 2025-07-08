@@ -9,21 +9,21 @@
 
 namespace Super::Compile::LLVM
 {
-	IR::IR(const std::string& inputFile)
+	IR::IR(const std::wstring& inputFile)
 	{
 		if (!std::filesystem::exists(inputFile))
 		{
 			throw std::runtime_error("文件不存在");
 		}
-		_inputFilePath = std::filesystem::absolute(inputFile).string();
+		_inputFilePath = std::filesystem::absolute(inputFile).wstring();
 		Super::Compile::GlobalData::FileCompileDataList[_inputFilePath] = {};
-		std::string fileContent = Super::Tool::File::ReadFileAllContent(_inputFilePath);
+		std::wstring fileContent = Super::Tool::File::ReadFileAllContent(_inputFilePath);
 
 		// 去除注释
 		Super::Compile::GlobalData::FileDataList[_inputFilePath] = 
 			Super::Compile::RemoveNote(fileContent).GetData();
 
-		//std::cout <<Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[_inputFilePath]) << std::endl;
+		std::wcout << Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[_inputFilePath]) << std::endl;
 
 		// 词法分析
 		_tokens = Super::Compile::LexicalAnalysis::ExtractToken(_inputFilePath).GetTokenStream();
@@ -36,13 +36,13 @@ namespace Super::Compile::LLVM
 		// 括号匹配
 		Super::Compile::LexicalAnalysis::Parenthesis(_inputFilePath, _tokens);
 
-		std::cout << Super::Tool::String::TokenToString(_tokens) << std::endl;
-		std::cout << "Define List\n" << Super::Tool::String::DictionaryStringToString(Super::Compile::GlobalData::FileCompileDataList[_inputFilePath].Define) << std::endl;
+		std::wcout << Super::Tool::String::TokenToString(_tokens) << std::endl;
+		std::wcout << L"Define List\n" << Super::Tool::String::DictionaryStringToString(Super::Compile::GlobalData::FileCompileDataList[_inputFilePath].Define) << std::endl;
 	}
 
-	std::string IR::Data()
+	std::wstring IR::Data()
 	{
-		std::string head = "; ModuleID = '" + _inputFilePath + "'\n";
+		std::wstring head = L"; ModuleID = '" + _inputFilePath + L"'\n";
 		return head + _ast.GetString();
 	}
 }

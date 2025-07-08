@@ -2,8 +2,8 @@
 
 namespace Super::Type
 {
-	std::string AST::GetString()
+	std::wstring AST::GetString()
 	{
-		return "";
+		return L"";
 	}
 }

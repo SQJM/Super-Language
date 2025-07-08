@@ -6,28 +6,22 @@
 #include <super/type/token.h>
 #include <super/config.h>
 
-#if SUPER_DEBUG == 1
-#define SUPER_ERROR_SHOW_FILE_LINE __FILE__ + ":" + std::to_string(__LINE__)
-#endif
-#if SUPER_DEBUG == 0
-#define SUPER_ERROR_SHOW_FILE_LINE ""
-#endif
 
 #define SUPER_ERROR(file, msg, token) \
-	throw Super::Error::NewError(file, msg + "\n" + SUPER_ERROR_SHOW_FILE_LINE, token)
+	Super::Error::NewError(file, msg + L"\n" , token);
 
 #define SUPER_ERROR_A(file, code, token) \
-	throw Super::Error::NewError(file, Super::Error::A[code] + "\n" + SUPER_ERROR_SHOW_FILE_LINE, token)
+	Super::Error::NewError(file, Super::Error::A[code] + L"\n" , token);
 
-#define SUPER_ERROR_MSG(msg) \
-	throw Super::Error::NewError(msg + "\n" + SUPER_ERROR_SHOW_FILE_LINE)
+#define SUPER_ERROR_THROW(file, msg, token) \
+	Super::Error::NewError(file, msg + L"\n" , token);exit(0);
+
+#define SUPER_ERROR_THROW_A(file, code, token) \
+	Super::Error::NewError(file, Super::Error::A[code] + L"\n" , token);exit(0);
 
 namespace Super::Error
 {
-	extern std::unordered_map<std::string, std::string> A;
+	extern std::unordered_map<std::wstring, std::wstring> A;
 
-	std::string AddIndicate(const std::string &file, const Super::Type::Token &token);
-	std::exception NewError(const std::string &file, const std::string &msg, const Super::Type::Token &token);
-	std::exception NewError(const std::string &file, const std::string &msg, const std::vector<Super::Type::Token> &tokens);
-	std::exception NewError(const std::string &msg);
+	void NewError(const std::wstring &file, const std::wstring &msg, const Super::Type::Token &token);
 }

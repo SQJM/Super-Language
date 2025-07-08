@@ -1,13 +1,16 @@
 ﻿#pragma once
-#include <super/type/token_name.h>
 #include <string>
+#include <vector>
+#include <super/type/token_name.h>
+
 namespace Super::Type
 {
 	struct Token
 	{
-		size_t line;
-		size_t column;
+		int line;
+		int column;
 		TokenName name;
-		std::string value;
+		std::wstring value;
+		Token(int l, int c, TokenName n, const std::wstring& v) : line(l), column(c), name(n), value(v) {}
 	};
 }

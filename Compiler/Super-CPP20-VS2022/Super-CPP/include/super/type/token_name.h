@@ -54,5 +54,5 @@ namespace Super::Type
 		KeywordCallsFunctionParenthesesRight
 	};
 
-	const std::string TokenNameToString(TokenName name);
+	const std::wstring TokenNameToString(TokenName name);
 }

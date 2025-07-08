@@ -12,11 +12,12 @@
 
 namespace Super::Tool::String
 {
-    std::string ConvertEncoding(const std::string& input, const char* fromCode, const char* toCode);
-	std::string ListToStringWithLineNumbers(const std::vector<std::string>& lines);
-	std::string DictionaryStringToString(const std::unordered_map<std::string, std::string>& map);
-	std::string TokenToString(const std::vector<Super::Type::Token>& tokens);
-	size_t GetDisplayWidth(const std::string& str);
-	bool IsWhitespace(char c);
-	bool IsWhitespace(std::string str);
+	std::string ConvertEncoding(const std::string& input, const char* fromCode, const char* toCode);
+	std::wstring ListToStringWithLineNumbers(const std::vector<std::wstring>& lines);
+	std::wstring DictionaryStringToString(const std::unordered_map<std::wstring, std::wstring>& map);
+	std::wstring TokenToString(const std::vector<Super::Type::Token>& tokens);
+	bool IsWhitespace(wchar_t c);
+	bool IsWhitespace(std::wstring str);
+	std::string WStringToEncoded(const std::wstring& input, const char* toCode);
+	size_t GetDisplayLength(const std::wstring& str);
 }

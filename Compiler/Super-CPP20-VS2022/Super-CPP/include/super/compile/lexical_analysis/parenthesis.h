@@ -8,5 +8,5 @@
 
 namespace Super::Compile::LexicalAnalysis
 {
-	void Parenthesis(const std::string& inputFilePath, std::vector<Super::Type::Token>& tokens);
+	void Parenthesis(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens);
 }

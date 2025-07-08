@@ -9,43 +9,43 @@
 namespace Super::Compile::LexicalAnalysis
 {
 
-    void Parenthesis(const std::string& inputFilePath, std::vector<Super::Type::Token>& tokens)
+    void Parenthesis(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens)
     {
         std::stack<Super::Type::Token> stack;
-        std::unordered_map<std::string, std::string> bracketPairs = {
-            { ")", "(" },
-            { "}", "{" },
-            { "]", "[" }
+        std::unordered_map<std::wstring, std::wstring> bracketPairs = {
+            { L")", L"(" },
+            { L"}", L"{" },
+            { L"]", L"[" }
         };
-        std::unordered_map<std::string, std::string> errorMessages = {
-            { "(", "200000" },
-            { ")", "200010" },
-            { "[", "200020" },
-            { "]", "200030" },
-            { "{", "200040" },
-            { "}", "200050" }
+        std::unordered_map<std::wstring, std::wstring> errorMessages = {
+            { L"(", L"200000" },
+            { L")", L"200010" },
+            { L"[", L"200040" },
+            { L"]", L"200050" },
+            { L"{", L"200020" },
+            { L"}", L"200030" }
         };
 
         for (const auto& token : tokens)
         {
-            const std::string& str = token.value;
-            if (str == ")" || str == "}"|| str == "]")
+            const std::wstring& str = token.value;
+            if (str == L")" || str == L"}"|| str == L"]")
             {
                 if (stack.empty())
                 {
-                    SUPER_ERROR_A(inputFilePath, errorMessages[str], token);
+                    SUPER_ERROR_THROW_A(inputFilePath, errorMessages[str], token);
                 }
                 else
                 {
                     auto& expected = bracketPairs[str];
                     if (stack.top().value != expected)
                     {
-                        SUPER_ERROR_A(inputFilePath, errorMessages[str], token);
+                        SUPER_ERROR_THROW_A(inputFilePath, errorMessages[str], token);
                     }
                     stack.pop();
                 }
             }
-            else if (str == "(" || str == "{" || str == "[")
+            else if (str == L"(" || str == L"{" || str == L"[")
             {
                 stack.push(token);
             }
@@ -53,16 +53,13 @@ namespace Super::Compile::LexicalAnalysis
 
         if (!stack.empty())
         {
-            std::ostringstream result;
             while (!stack.empty())
             {
                 const auto& token = stack.top();
-                auto& msg = Super::Error::A[errorMessages[token.value]];
-                result << Super::Error::AddIndicate(inputFilePath, token) << "\n"
-                    << msg << "\n";
+                SUPER_ERROR_A(inputFilePath, errorMessages[token.value], token);
                 stack.pop();
             }
-            SUPER_ERROR_MSG(result.str());
+            exit(0);
         }
     }
 

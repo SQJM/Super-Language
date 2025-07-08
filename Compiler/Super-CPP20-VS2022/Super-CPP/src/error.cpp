@@ -1,78 +1,53 @@
 ﻿#include <super/error.h>
 #include <super/compile/global_data.h>
 #include <super/tool/string.h>
-#include <super\info.h>
+#include <super/info.h>
 
 namespace Super::Error
 {
-	std::unordered_map<std::string, std::string> A = {
-		{"000000", "不能使用内置关键字作为宏"},
-		{"000010", "不完整的宏定义"},
-		{"000020", "不能使用内置关键字作为宏来解除"},
-		{"000030", "不完整的解除宏定义"},
-		{"000040", "不能使用内置关键字作为宏条件"},
-		{"000050", "不完整的宏条件"},
-		{"000060", "错误消息必须是字符串"},
-		{"000070", "错误消息没有可输出字符串"},
-		{"000080", "消息必须是字符串"},
-		{"000090", "消息没有可输出字符串"},
-		{"000100", "包含汇编文件路径必须是字符串"},
-		{"000110", "没有汇编文件路径"},
-		{"000120", "导入高级宏 *.sdp 文件路径必须是字符串"},
-		{"000130", "没有导入高级宏 *.sdp 文件路径"},
-		{"000140", "不能使用变量名作为宏"},
-		{"000150", "不能使用自定义类型名字作为宏"},
-
-		{"100000", "字符串双引号没有对齐"},
-		{"100010", "字符串双引号没有对齐"},
-
-		{"200000", "左括号缺少匹配的右括号"},
-		{"200010", "右括号缺少匹配的左括号"},
-		{"200020", "左花括号缺少匹配的右花括号"},
-		{"200030", "右花括号缺少匹配的左花括号"},
-		{"200040", "左中括号缺少匹配的右中括号"},
-		{"200050", "右中括号缺少匹配的左中括号"},
-
-		{"400000", "类型后面缺少名字"},
-		{"400010", "类型后面重复类型"},
-		{"400020", "符号不连续"},
-		{"400030", "修饰关键字不能放在类型关键字后面"},
-		{"400040", "多个变量名"},
-		{"400050", "变量的声明不允许此符号"}
+	std::unordered_map<std::wstring, std::wstring> A = {
+		{L"000000", L"不能使用内置关键字作为宏"},
+		{L"000010", L"不完整的宏定义"},
+		{L"000020", L"不能使用内置关键字作为宏来解除"},
+		{L"000030", L"不完整的解除宏定义"},
+		{L"000040", L"不能使用内置关键字作为宏条件"},
+		{L"000050", L"不完整的宏条件"},
+		{L"000060", L"错误消息必须是字符串"},
+		{L"000070", L"错误消息没有可输出字符串"},
+		{L"000080", L"消息必须是字符串"},
+		{L"000090", L"消息没有可输出字符串"},
+		{L"000100", L"包含汇编文件路径必须是字符串"},
+		{L"000110", L"没有汇编文件路径"},
+		{L"000120", L"导入高级宏 *.sdp 文件路径必须是字符串"},
+		{L"000130", L"没有导入高级宏 *.sdp 文件路径"},
+		{L"000140", L"不能使用变量名作为宏"},
+		{L"000150", L"不能使用自定义类型名字作为宏"},
+		{L"100000", L"字符串双引号没有对齐"},
+		{L"100010", L"字符串双引号没有对齐"},
+		{L"200000", L"左括号缺少匹配的右括号"},
+		{L"200010", L"右括号缺少匹配的左括号"},
+		{L"200020", L"左花括号缺少匹配的右花括号"},
+		{L"200030", L"右花括号缺少匹配的左花括号"},
+		{L"200040", L"左中括号缺少匹配的右中括号"},
+		{L"200050", L"右中括号缺少匹配的左中括号"},
+		{L"400000", L"类型后面缺少名字"},
+		{L"400010", L"类型后面重复类型"},
+		{L"400020", L"符号不连续"},
+		{L"400030", L"修饰关键字不能放在类型关键字后面"},
+		{L"400040", L"多个变量名"},
+		{L"400050", L"变量的声明不允许此符号"}
 	};
-	
-	std::string AddIndicate(const std::string& file, const Super::Type::Token& token)
+
+	void NewError(const std::wstring& file, const std::wstring& msg, const Super::Type::Token& token)
 	{
-		std::string head = std::to_string(token.line) + ":" + std::to_string(token.column) + "│";
+		std::wstring head = std::to_wstring(token.line) + L":" + std::to_wstring(token.column) + L'│';
 		auto& lines = Super::Compile::GlobalData::FileDataList[file];
-		std::string body = lines[token.line - 1];
-		size_t width = head.size() + Super::Tool::String::GetDisplayWidth(body.substr(0, token.column));
-		std::string indicate = std::string(width, '~') + "^";
-		return head + body + "\n" + indicate;
-	}
+		std::wstring body = lines[token.line - 1];
+		size_t width = head.size() + Super::Tool::String::GetDisplayLength(body.substr(0, token.column)) - 1;
+		std::wstring indicate(width, L'~');
+		indicate += L"^";
 
-	static std::exception CreateError(const std::string& msg)
-	{
-		return std::runtime_error(msg+"\nSuper "+ Super::Info::Version);
-	}
-
-	std::exception NewError(const std::string& file, const std::string& msg, const Super::Type::Token& token)
-	{
-		return CreateError(AddIndicate(file, token) + "\n" + msg);
-	}
-
-	std::exception NewError(const std::string& file, const std::string& msg, const std::vector<Super::Type::Token>& tokens)
-	{
-		std::ostringstream result;
-		for (const auto& token : tokens)
-		{
-			result << AddIndicate(file, token) << "\n";
-		}
-		return CreateError(result.str() + msg);
-	}
-
-	std::exception NewError(const std::string& msg)
-	{
-		return CreateError(msg);
+		std::wcerr << head << body << L"\n" << indicate;
+		std::wcerr << L"\n" + msg + L"\nSuper " + Super::Info::Version << std::endl;
 	}
 }

@@ -13,12 +13,12 @@ namespace Super::Compile::LLVM
     class IR
     {
     private:
-        std::string _inputFilePath;
+        std::wstring _inputFilePath;
         std::vector<Super::Type::Token> _tokens;
         Super::Type::AST _ast;
 
     public:
-        IR(const std::string& inputFile);
-        std::string Data();
+        IR(const std::wstring& inputFile);
+        std::wstring Data();
     };
 }
