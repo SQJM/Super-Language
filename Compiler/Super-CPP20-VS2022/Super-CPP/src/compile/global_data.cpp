@@ -4,6 +4,8 @@ namespace Super::Compile::GlobalData
 {
 	SDP_Data SDP;
 	SPM_Data SPM;
+	std::unordered_map<std::wstring, std::unordered_map<std::wstring, std::wstring>> SDEF;
+
 	std::unordered_map<std::wstring, CurrentFileCompileData> FileCompileDataList;
 	std::unordered_map<std::wstring, std::vector<std::wstring>> FileDataList;
 

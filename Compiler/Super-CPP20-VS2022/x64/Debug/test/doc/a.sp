@@ -1,4 +1,4 @@
-import std
+import ":std"
 
 int int1
 int jkk
@@ -17,6 +17,15 @@ typedef long int big_int
 
 #message "fdsg"
 #message "f"
+
+#import "[.]/dd.sdef"
+#import ":std/dd.sdef"
+
+int a = 1
+#asm
+	ADD eax, 1, %a
+	MOV %a, eax
+#end
 
 class string
 {

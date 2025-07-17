@@ -128,4 +128,13 @@ namespace Super::Tool::String
 		}
 		return length;
 	}
+
+	std::wstring RemoveFirstAndLastChar(const std::wstring& str)
+	{
+		if (str.length() > 1)
+		{
+			return str.substr(1, str.length() - 2);
+		}
+		return L"";
+	}
 }

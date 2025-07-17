@@ -20,13 +20,20 @@ namespace Super::Compile::LexicalAnalysis
 
 			if (isDefineName)
 			{
+				if (tokenName != Super::Type::TokenName::None)
+				{
+					SUPER_ERROR_THROW_A(inputFilePath, L"000000", Super::Type::Token(line + 1, column, tokenName, L""));
+				}
 				isLineToOneToken = true;
 				isDefineName = false;
-				tokenName = Super::Type::TokenName::DefineName;
 				goto end;
 			}
 			else if (isSetDefineName)
 			{
+				if (tokenName != Super::Type::TokenName::None)
+				{
+					SUPER_ERROR_THROW_A(inputFilePath, L"000010", Super::Type::Token(line + 1, column));
+				}
 				isSetDefineName = false;
 				tokenName = Super::Type::TokenName::DefineName;
 				goto end;
@@ -83,8 +90,7 @@ namespace Super::Compile::LexicalAnalysis
 		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token& token)
 									{
 										return token.name == Super::Type::TokenName::Null;
-									}),
-					 tokens.end());
+									}), tokens.end());
 	}
 
 	void ExtractToken::ProcessStrings(size_t& l, size_t& i, const std::vector<wchar_t>& lineData, std::wostringstream& temp, const Super::Type::TokenName& tokenName) const
@@ -97,7 +103,7 @@ namespace Super::Compile::LexicalAnalysis
 
 			if (c == L'\n' && (temp.str().size() == 0 || temp.str().empty()))
 			{
-				SUPER_ERROR_THROW_A(inputFilePath, L"100000", Super::Type::Token(l + 1, i, tokenName, L""));
+				SUPER_ERROR_THROW_A(inputFilePath, L"100000", Super::Type::Token(l + 1, i));
 			}
 
 			if (escape)
@@ -117,7 +123,7 @@ namespace Super::Compile::LexicalAnalysis
 					if (i + 1 < lineData.size() &&
 						Super::Keyword::StringAfterTheSymbols.end() == std::ranges::find(Super::Keyword::StringAfterTheSymbols, std::wstring(1, lineData[i + 1])))
 					{
-						SUPER_ERROR_THROW_A(inputFilePath, L"100010", Super::Type::Token(l + 1, i + 1, tokenName, L""));
+						SUPER_ERROR_THROW_A(inputFilePath, L"100010", Super::Type::Token(l + 1, i + 1));
 					}
 					temp << c;
 					return;
@@ -173,7 +179,7 @@ namespace Super::Compile::LexicalAnalysis
 				{
 					if (lineData[j + 1] == L'\n')
 					{
-						SUPER_ERROR_THROW_A(inputFilePath, L"100000", Super::Type::Token(i + 1, j + 1, tokenName, L""));
+						SUPER_ERROR_THROW_A(inputFilePath, L"100000", Super::Type::Token(i + 1, j + 1));
 					}
 					AddTokens(i, j, tokenName, temp);
 					temp << c;
@@ -231,7 +237,7 @@ namespace Super::Compile::LexicalAnalysis
 			if (tokens[i].value == L";" && i + 1 < tokens.size()
 				&& Symbols.end() != std::ranges::find(Symbols, tokens[i + 1].value))
 			{
-				tokens[i] = Super::Type::Token(0, 0, Super::Type::TokenName::Null, L"");
+				tokens[i] = Super::Type::GetNullToken();
 			}
 		}
 		ClearNullToken();

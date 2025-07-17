@@ -25,8 +25,6 @@ namespace Super::Type
 		DefinePro,
 		// 符号
 		Symbols,
-		// 上标数字
-		UpperNumberSymbols,
 		// 字符串
 		String,
 		// 字符

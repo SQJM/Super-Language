@@ -17,7 +17,6 @@ namespace Super::Type
         case TokenName::DefineValue: return L"DefineValue";
         case TokenName::DefinePro: return L"DefinePro";
         case TokenName::Symbols: return L"Symbols";
-        case TokenName::UpperNumberSymbols: return L"UpperNumberSymbols";
         case TokenName::String: return L"String";
         case TokenName::Char: return L"Char";
         case TokenName::VarName: return L"VarName";
