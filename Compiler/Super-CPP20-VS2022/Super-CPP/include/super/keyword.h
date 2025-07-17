@@ -88,8 +88,7 @@ namespace Super::Keyword
 		L"match_err",
 		L"match_finally",
 		L"continue",
-		L"return",
-		L"if_return"
+		L"return"
 	};
 
 	// 预处理指令
@@ -104,6 +103,7 @@ namespace Super::Keyword
 		L"#message",
 		L"#include_asm",
 		L"#import_sdp",
+		L"import_def",
 		L"#if",
 		L"#elif",
 		L"#else"
@@ -224,6 +224,22 @@ namespace Super::Keyword
 		L"&",
 		L"%",
 		L"~"
+	};
+
+	// 字符串后面允许的字符
+	const std::vector<std::wstring> StringAfterTheSymbols =
+	{
+		L"+",
+		L"|",
+		L"&",
+		L"(",
+		L")",
+		L"[",
+		L";",
+		L"\r",
+		L"\n",
+		L" ",
+		L"\0"
 	};
 
 	// 特殊符号

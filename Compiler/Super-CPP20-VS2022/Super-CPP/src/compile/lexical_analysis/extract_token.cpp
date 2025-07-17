@@ -87,7 +87,7 @@ namespace Super::Compile::LexicalAnalysis
 					 tokens.end());
 	}
 
-	void ExtractToken::ProcessStrings(size_t& l, size_t& i, const std::vector<wchar_t>& lineData, std::wostringstream& temp, const Super::Type::TokenName& tokenName)
+	void ExtractToken::ProcessStrings(size_t& l, size_t& i, const std::vector<wchar_t>& lineData, std::wostringstream& temp, const Super::Type::TokenName& tokenName) const
 	{
 		bool escape = false;
 		i++;
@@ -114,6 +114,11 @@ namespace Super::Compile::LexicalAnalysis
 				}
 				else if ((c == L'"' || c == L'\'') && !escape)
 				{
+					if (i + 1 < lineData.size() &&
+						Super::Keyword::StringAfterTheSymbols.end() == std::ranges::find(Super::Keyword::StringAfterTheSymbols, std::wstring(1, lineData[i + 1])))
+					{
+						SUPER_ERROR_THROW_A(inputFilePath, L"100010", Super::Type::Token(l + 1, i + 1, tokenName, L""));
+					}
 					temp << c;
 					return;
 				}
@@ -129,7 +134,6 @@ namespace Super::Compile::LexicalAnalysis
 		std::wstring line;
 
 		std::wostringstream temp;
-		bool isContinueLineToOneToken = false;
 		Super::Type::TokenName tokenName = Super::Type::TokenName::None;
 
 		// 提取 Token
@@ -140,27 +144,25 @@ namespace Super::Compile::LexicalAnalysis
 			{
 				continue;
 			}
+
 			size_t lineLength = lineData.size();
-			lineData[lineLength - 1] = L'\n';
+			lineData.emplace_back(L'\n');
 			for (size_t j = 0; j < lineLength; j++)
 			{
 				wchar_t c = lineData[j];
 				if (isLineToOneToken)
 				{
-					if (isContinueLineToOneToken)
-					{
-						isContinueLineToOneToken = false;
-						continue;
-					}
 					if (c == L'\\' && lineData[j + 1] == L'\n')
 					{
-						isContinueLineToOneToken = true;
 						continue;
 					}
-					else if (!isContinueLineToOneToken && c == L'\n')
+					else if (c == L';')
 					{
 						AddTokens(i, j, tokenName, temp);
 						isLineToOneToken = false;
+						temp << L";";
+						tokenName = Super::Type::TokenName::Symbols;
+						AddTokens(i, j, tokenName, temp);
 						break;
 					}
 					temp << c;
@@ -210,6 +212,29 @@ namespace Super::Compile::LexicalAnalysis
 				temp << c;
 			}
 		}
+
+		const std::vector<std::wstring> Symbols =
+		{
+			L"-",
+			L"+",
+			L"/",
+			L"*",
+			L".",
+			L"|",
+			L"^",
+			L"&",
+			L",",
+			L"{"
+		};
+		for (size_t i = 0; i < tokens.size(); i++)
+		{
+			if (tokens[i].value == L";" && i + 1 < tokens.size()
+				&& Symbols.end() != std::ranges::find(Symbols, tokens[i + 1].value))
+			{
+				tokens[i] = Super::Type::Token(0, 0, Super::Type::TokenName::Null, L"");
+			}
+		}
+		ClearNullToken();
 	}
 
 	std::vector<Super::Type::Token> ExtractToken::GetTokenStream() const

@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		//CP_O({ L"out.o", L"C:\\Users\\sqjm\\Desktop\\Super-Language\\Compiler\\Super-CPP20-VS2022\\x64\\Debug\\test\\doc\\a.sp" }, {});
+		CP_O({ L"out.o", L"C:\\Users\\sqjm\\Desktop\\Super-Language\\Compiler\\Super-CPP20-VS2022\\x64\\Debug\\test\\doc\\a.sp" }, {});
 		return cp.ExitCode();
 	}
 	catch (const std::exception& ex)

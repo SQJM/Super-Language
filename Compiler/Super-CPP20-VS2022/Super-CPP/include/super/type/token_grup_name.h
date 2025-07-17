@@ -6,19 +6,17 @@ namespace Super::Type
 	enum class TokenGroupName
 	{
 		None,
-		// 声明
-		Declaration,
-		// 调用
-		Call,
-		// 定义
-		Definition,
-		// 控制流
-		ControlFlow,
 		// 作用域
 		Scope,
-		// 自增语句
-		AutoIncrementStatement,
-		// 自减语句
-		AutoDecrementStatement,
+		// 语句
+		Statement,
+		// 表达式
+		Expression,
+		// 表达式语句
+		ExpressionStatement,
+		// 成员作用域
+		MemberScope,
+		// 命名空间作用域
+		NamespaceScope,
 	};
 }

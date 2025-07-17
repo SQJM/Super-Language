@@ -18,6 +18,49 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\super\compile\global_data.h" />
+    <ClInclude Include="include\super\compile\lexical_analysis\extract_token.h" />
+    <ClInclude Include="include\super\compile\lexical_analysis\parenthesis.h" />
+    <ClInclude Include="include\super\compile\lexical_analysis\processing_preprocessing.h" />
+    <ClInclude Include="include\super\compile\lexical_analysis\to_token_group.h" />
+    <ClInclude Include="include\super\compile\llvm\ir.h" />
+    <ClInclude Include="include\super\compile\remove_note.h" />
+    <ClInclude Include="include\super\config.h" />
+    <ClInclude Include="include\super\error.h" />
+    <ClInclude Include="include\super\info.h" />
+    <ClInclude Include="include\super\keyword.h" />
+    <ClInclude Include="include\super\tool\command_parsing.h" />
+    <ClInclude Include="include\super\tool\file.h" />
+    <ClInclude Include="include\super\tool\log.h" />
+    <ClInclude Include="include\super\tool\string.h" />
+    <ClInclude Include="include\super\type\ast.h" />
+    <ClInclude Include="include\super\type\token.h" />
+    <ClInclude Include="include\super\type\token_grammar_name.h" />
+    <ClInclude Include="include\super\type\token_group.h" />
+    <ClInclude Include="include\super\type\token_grup_name.h" />
+    <ClInclude Include="include\super\type\token_name.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\compile\lexical_analysis\processing_preprocessing.cpp" />
+    <ClCompile Include="src\type\token_grammar_name.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\compile\global_data.cpp" />
+    <ClCompile Include="src\compile\lexical_analysis\extract_token.cpp" />
+    <ClCompile Include="src\compile\lexical_analysis\parenthesis.cpp" />
+    <ClCompile Include="src\compile\lexical_analysis\to_token_ground.cpp" />
+    <ClCompile Include="src\compile\llvm\ir.cpp" />
+    <ClCompile Include="src\compile\remove_note.cpp" />
+    <ClCompile Include="src\error.cpp" />
+    <ClCompile Include="src\info.cpp" />
+    <ClCompile Include="src\keyword.cpp" />
+    <ClCompile Include="src\tool\command_parsing.cpp" />
+    <ClCompile Include="src\tool\file.cpp" />
+    <ClCompile Include="src\tool\log.cpp" />
+    <ClCompile Include="src\tool\string.cpp" />
+    <ClCompile Include="src\type\ast.cpp" />
+    <ClCompile Include="src\type\token_name.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -133,60 +176,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\compile\global_data.cpp" />
-    <ClCompile Include="src\compile\lexical_analysis\extract_token.cpp" />
-    <ClCompile Include="src\compile\lexical_analysis\parenthesis.cpp" />
-    <ClCompile Include="src\compile\lexical_analysis\to_token_ground.cpp" />
-    <ClCompile Include="src\compile\lexical_analysis\to_token_group.cpp" />
-    <ClCompile Include="src\compile\remove_note.cpp" />
-    <ClCompile Include="src\compile\llvm\ir.cpp" />
-    <ClCompile Include="src\error.cpp" />
-    <ClCompile Include="src\info.cpp" />
-    <ClCompile Include="src\keyword.cpp" />
-    <ClCompile Include="src\tool\command_parsing.cpp" />
-    <ClCompile Include="src\tool\file.cpp" />
-    <ClCompile Include="src\tool\log.cpp" />
-    <ClCompile Include="src\tool\string.cpp" />
-    <ClCompile Include="src\type\ast.cpp" />
-    <ClCompile Include="src\type\token_name.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\super\compile\lexical_analysis\to_token_group.h" />
-    <ClInclude Include="include\super\config.h" />
-    <ClInclude Include="include\super\compile\global_data.h" />
-    <ClInclude Include="include\super\compile\lexical_analysis\extract_token.h" />
-    <ClInclude Include="include\super\compile\lexical_analysis\parenthesis.h" />
-    <ClInclude Include="include\super\compile\lexical_analysis\to_token_group.h" />
-    <ClInclude Include="include\super\compile\remove_note.h" />
-    <ClInclude Include="include\super\compile\llvm\ir.h" />
-    <ClInclude Include="include\super\error.h" />
-    <ClInclude Include="include\super\info.h" />
-    <ClInclude Include="include\super\keyword.h" />
-    <ClInclude Include="include\super\tool\command_parsing.h" />
-    <ClInclude Include="include\super\tool\file.h" />
-    <ClInclude Include="include\super\tool\log.h" />
-    <ClInclude Include="include\super\tool\string.h" />
-    <ClInclude Include="include\super\type\ast.h" />
-    <ClInclude Include="include\super\type\token.h" />
-    <ClInclude Include="include\super\type\token_group.h" />
-    <ClInclude Include="include\super\type\token_grup_name.h" />
-    <ClInclude Include="include\super\type\token_name.h" />
-    <ClInclude Include="Super\include\compile\global_data.h" />
-    <ClInclude Include="Super\include\compile\lexical_analysis\extract_token.h" />
-    <ClInclude Include="Super\include\compile\lexical_analysis\parenthesis .h" />
-    <ClInclude Include="Super\include\compile\lexical_analysis\remove_note.h" />
-    <ClInclude Include="Super\include\compile\llvm\ir.h" />
-    <ClInclude Include="Super\include\error.h" />
-    <ClInclude Include="Super\include\info.h" />
-    <ClInclude Include="Super\include\keyword.h" />
-    <ClInclude Include="Super\include\tool\command_parsing.h" />
-    <ClInclude Include="Super\include\tool\string.h" />
-    <ClInclude Include="Super\include\type\ast.h" />
-    <ClInclude Include="Super\include\type\token.h" />
-    <ClInclude Include="Super\include\type\token_name.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

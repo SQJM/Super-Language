@@ -7,13 +7,63 @@ int** intpp
 
 ; type sy name
 ; type sy name =
+; type sy name = {}
 ; type sy name ()
 ; type sy name () {}
 ; type name ()
 ; err
 
+typedef long int big_int
+
 #message "fdsg"
 #message "f"
+
+class string
+{
+	public:
+		operator void =(char str[])
+		operator void [](int index)
+
+	private:
+		char* str[] = nullptr
+}
+
+void string::=(char str[])
+{
+	this->str = str
+}
+
+class myObj
+{
+	public:
+		virtual void vv()
+		virtual void vvg()!
+		void hi()
+		void hi2()
+		{
+			std::print("hi2")
+		}
+}
+
+void myObj::hi()
+{
+
+}
+
+struct myStruct
+{
+
+}
+
+enum myEnum
+{
+
+}
+
+union myUnio
+{
+
+}
 
 string dfhg = "gg" + "ds"
 + "fd"
@@ -21,7 +71,7 @@ string dfhg = "gg" + "ds"
 #define am 23 4352\
 e2
 
-; 取消 am
+; 鍙栨秷 am
 #undef am
 
 #define a
@@ -37,9 +87,9 @@ string ddaaaan = "gf"
 #ifdef a
 string ddaa = "gf"
 #endif
-;void hell速度发对o)"
-;[[分分]]]
-void hello()
+;void hell閫熷害鍙戝o)"
+;[[鍒嗗垎]]]
+void hello();
 
 int& kk()
 {
@@ -74,15 +124,23 @@ int main()
 	int sdf = await fn()
 
 	char dd[] = "d\"a1;fd2;"
-	char dd[] = "d\"a1;f中文d2;"
+	char dd1[] = "d\"a1;f涓枃d2;"
+	char* ddp[] = new("sdsf")
+	ddp = nullptr
+	delete ddp[]
 
 	static const int d
 
 	const char sttt = 'f'
 
+	result fn()
+	match_ok()
+	{
+	}
+
 	char ccc = 'g'
 
-	int 中文 = 1
+	int 涓枃 = 1
 
 	hello()
 
@@ -102,8 +160,8 @@ int main()
 
 	bool* ptr_bool_var_1 = nullptr
 	;-
-	- 这个
-	- 注释 -\;
+	- 杩欎釜
+	- 娉ㄩ噴 -\;
 	-;
 	int sss = 2
 	return 0
