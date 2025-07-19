@@ -1,6 +1,8 @@
 ﻿#include <super/compile/remove_note.h>
 #include <sstream>
 #include <iostream>
+#include <ranges>
+#include <algorithm>
 #include <super/tool/string.h>
 
 // 符号
@@ -36,12 +38,15 @@ namespace Super::Compile
 	{
 		short state = 0; // 0:普通代码 1:多行注释 2:字符串
 		bool escape = false;
-		std::wistringstream iss(fileData);
 		std::wstring line;
 		wchar_t upChar = L'\0';
 
-		// TODO: 需要考虑多平台处理换行的方式
-		while (std::getline(iss, line, L'\n'))
+		// 统一换行符为 LF
+		std::wstring unifiedFileData = Super::Tool::String::UnifyLineEndings(fileData);
+
+		std::wistringstream unifiedIss(unifiedFileData);
+
+		while (std::getline(unifiedIss, line, L'\n'))
 		{
 			std::wstring newLine;
 			size_t size = line.size();

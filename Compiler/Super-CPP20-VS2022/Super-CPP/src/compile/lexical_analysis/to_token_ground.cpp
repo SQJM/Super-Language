@@ -7,38 +7,35 @@ namespace Super::Compile::LexicalAnalysis
 	namespace ToTokenGroupRule
 	{
 		std::unordered_map<std::wstring, std::vector<std::wstring>> StateDispose =
-		{
-			{L"import",{L""}}
-		};
+			{
+				{L"import", {L""}}};
 
 		std::unordered_map<std::wstring, std::vector<std::wstring>> SymbolStateDispose =
-		{
-		};
+			{};
 	}
 
 	const std::vector<std::wstring> Keyword =
-	{
-		L"delete",
-		L"throw",
-		L"sizeof",
-		L"type_name",
-		L"module",
-		L"exports",
-		L"export",
-		L"template",
-		L"import",
-		L"type_cast",
-		L"direct_cast",
-		L"class_cast",
-		L"null",
-		L"nullptr",
-		L"typedef",
-		L"#include_asm",
-		L"#import_sdp",
-		L"#define_pro"
-	};
+		{
+			L"delete",
+			L"throw",
+			L"sizeof",
+			L"type_name",
+			L"module",
+			L"exports",
+			L"export",
+			L"template",
+			L"import",
+			L"type_cast",
+			L"direct_cast",
+			L"class_cast",
+			L"null",
+			L"nullptr",
+			L"typedef",
+			L"#include_asm",
+			L"#import_sdp",
+			L"#define_pro"};
 
-	ToTokenGroup::ToTokenGroup(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens)
+	ToTokenGroup::ToTokenGroup(const std::wstring &inputFilePath, std::vector<Super::Type::Token> &tokens)
 	{
 		_tokens = tokens;
 		for (size_t i = 0; i < tokens.size(); i++)
@@ -47,15 +44,14 @@ namespace Super::Compile::LexicalAnalysis
 			std::wstring value = token.value;
 			if (token.name == Super::Type::TokenName::None)
 			{
-
 			}
 			else if (token.name == Super::Type::TokenName::Symbols)
 			{
 				if (ToTokenGroupRule::SymbolStateDispose.find(value) == ToTokenGroupRule::SymbolStateDispose.end())
 				{
-					SUPER_ERROR_THROW_A(inputFilePath, L"400060", token)
+					SUPER_ERROR_THROW_CODE(inputFilePath, L"400060", token)
 				}
-				//ToTokenGroupRule::SymbolStateDispose[value](i);
+				// ToTokenGroupRule::SymbolStateDispose[value](i);
 			}
 			else if (token.name == Super::Type::TokenName::String)
 			{
@@ -66,7 +62,7 @@ namespace Super::Compile::LexicalAnalysis
 			{
 				if (ToTokenGroupRule::SymbolStateDispose.find(value) == ToTokenGroupRule::SymbolStateDispose.end())
 				{
-					SUPER_ERROR_THROW_A(inputFilePath, L"400070", token)
+					SUPER_ERROR_THROW_CODE(inputFilePath, L"400070", token)
 				}
 
 				if (IsMemberScope(value))
@@ -101,7 +97,7 @@ namespace Super::Compile::LexicalAnalysis
 				}
 				else
 				{
-					SUPER_ERROR_THROW_A(inputFilePath, L"100020", token)
+					SUPER_ERROR_THROW_CODE(inputFilePath, L"100020", token)
 				}
 			}
 		}
@@ -112,50 +108,49 @@ namespace Super::Compile::LexicalAnalysis
 		return scope;
 	}
 
-	bool ToTokenGroup::IsMemberScope(const std::wstring& value)
+	bool ToTokenGroup::IsMemberScope(const std::wstring &value)
 	{
 		return value == L"class" || value == L"struct" || value == L"union" || value == L"enum";
 	}
 
-	bool ToTokenGroup::IsNamespaceScope(const std::wstring& value)
+	bool ToTokenGroup::IsNamespaceScope(const std::wstring &value)
 	{
 		return value == L"namespace";
 	}
 
-	bool ToTokenGroup::IsCallFunction(const std::wstring& value)
+	bool ToTokenGroup::IsCallFunction(const std::wstring &value)
 	{
 		return false;
 	}
 
-	bool ToTokenGroup::IsDeclarationVar(const std::wstring& value)
+	bool ToTokenGroup::IsDeclarationVar(const std::wstring &value)
 	{
 		return false;
 	}
 
-	bool ToTokenGroup::IsDeclarationFunction(const std::wstring& value)
+	bool ToTokenGroup::IsDeclarationFunction(const std::wstring &value)
 	{
 		return false;
 	}
 
-	bool ToTokenGroup::IsDefineVar(const std::wstring& value)
+	bool ToTokenGroup::IsDefineVar(const std::wstring &value)
 	{
 		return false;
 	}
 
-	bool ToTokenGroup::IsDefineFunction(const std::wstring& value)
+	bool ToTokenGroup::IsDefineFunction(const std::wstring &value)
 	{
 		return false;
 	}
 
-	bool ToTokenGroup::IsDefineScope(const std::wstring& value)
+	bool ToTokenGroup::IsDefineScope(const std::wstring &value)
 	{
 		return false;
 	}
 
-	bool ToTokenGroup::IsControlFlow(const std::wstring& value)
+	bool ToTokenGroup::IsControlFlow(const std::wstring &value)
 	{
-		return value == L"if" || value == L"while" || value == L"for" || value == L"do"
-			|| value == L"loop" || value == L"switch" || value == L"result" || value == L"if_return";
+		return value == L"if" || value == L"while" || value == L"for" || value == L"do" || value == L"loop" || value == L"switch" || value == L"result" || value == L"if_return";
 	}
 
 }

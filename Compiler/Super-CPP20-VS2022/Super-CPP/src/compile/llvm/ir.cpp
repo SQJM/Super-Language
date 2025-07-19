@@ -15,24 +15,24 @@ namespace Super::Compile::LLVM
 	{
 		if (!std::filesystem::exists(inputFile))
 		{
-			throw std::runtime_error("文件不存在");
+			SUPER_ERROR_THROW_CODE_NONE(inputFile, L"100030");
 		}
 		_inputFilePath = std::filesystem::absolute(inputFile).wstring();
 		Super::Compile::GlobalData::FileCompileDataList[_inputFilePath] = {};
 		std::wstring fileContent = Super::Tool::File::ReadFileAllContent(_inputFilePath);
 
 		// 去除注释
-		Super::Compile::GlobalData::FileDataList[_inputFilePath] =
+		Super::Compile::GlobalData::FileDataList[inputFile] = 
 			Super::Compile::RemoveNote(fileContent).GetData();
 
-		std::wcout << Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[_inputFilePath]) << std::endl;
+		//std::wcout << Tool::String::ListToStringWithLineNumbers(Super::Compile::GlobalData::FileDataList[inputFile]) << std::endl;
 
 		// 词法分析
 		std::vector<Super::Type::Token> tokens = Super::Compile::LexicalAnalysis::ExtractToken(_inputFilePath).GetTokenStream();
 
 		if (tokens.empty())
 		{
-			throw std::runtime_error("没有提取到 Token");
+			SUPER_ERROR_THROW_CODE_NONE(inputFile, L"100040");
 		}
 
 		// 括号匹配
@@ -41,7 +41,7 @@ namespace Super::Compile::LLVM
 		// 预处理指令处理
 		Super::Compile::LexicalAnalysis::ProcessingPreprocessing(_inputFilePath, tokens);
 
-		std::wcout << Super::Tool::String::TokenToString(tokens) << std::endl;
+		//std::wcout << Super::Tool::String::TokenToString(tokens) << std::endl;
 
 		// 转 Token 组
 		//Super::Type::TokenGroup tg = Super::Compile::LexicalAnalysis::ToTokenGroup(_inputFilePath, tokens).ToTokenGroupData();

@@ -26,10 +26,12 @@
     <ClInclude Include="include\super\compile\lexical_analysis\to_token_group.h" />
     <ClInclude Include="include\super\compile\llvm\ir.h" />
     <ClInclude Include="include\super\compile\remove_note.h" />
+    <ClInclude Include="include\super\compile\SDEF\sdef_analysis.h" />
     <ClInclude Include="include\super\config.h" />
     <ClInclude Include="include\super\error.h" />
     <ClInclude Include="include\super\info.h" />
     <ClInclude Include="include\super\keyword.h" />
+    <ClInclude Include="include\super\compile\project_config.h" />
     <ClInclude Include="include\super\tool\command_parsing.h" />
     <ClInclude Include="include\super\tool\file.h" />
     <ClInclude Include="include\super\tool\log.h" />
@@ -42,6 +44,8 @@
     <ClInclude Include="include\super\type\token_name.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\compile\SDEF\sdef_analysis.cpp" />
+    <ClCompile Include="src\compile\project_config.cpp" />
     <ClCompile Include="src\compile\lexical_analysis\processing_preprocessing.cpp" />
     <ClCompile Include="src\type\token_grammar_name.cpp" />
     <ClCompile Include="main.cpp" />
@@ -118,6 +122,7 @@
     <LibraryPath>$(MSBuildStartupDirectory)\env\icu4c-77_1-Win64-MSVC2022\bin64;$(MSBuildStartupDirectory)\env\icu4c-77_1-Win64-MSVC2022\lib64;$(FrameworkSdkDir)Lib\10.0.26100.0\ucrt\x64;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <ExternalIncludePath>$(MSBuildStartupDirectory)\env\icu4c-77_1-Win64-MSVC2022\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

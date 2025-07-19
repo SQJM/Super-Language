@@ -21,4 +21,6 @@ namespace Super::Tool::String
 	std::string WStringToEncoded(const std::wstring& input, const char* toCode);
 	size_t GetDisplayLength(const std::wstring& str);
 	std::wstring RemoveFirstAndLastChar(const std::wstring& str);
+	void ReplaceAll(std::wstring& str, const std::wstring& from, const std::wstring& to);
+	std::wstring UnifyLineEndings(const std::wstring& fileData);
 }

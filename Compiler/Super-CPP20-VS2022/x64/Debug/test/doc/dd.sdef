@@ -1,2 +1,13 @@
 ; SDEF
+
 #define addf 1
+
+#ifdef sdef
+
+#define sf 1
+
+#endif
+
+#if sf == 1
+
+#endif

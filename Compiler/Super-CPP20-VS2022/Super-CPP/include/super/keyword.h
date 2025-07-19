@@ -104,8 +104,10 @@ namespace Super::Keyword
 		L"#asm",
 		L"#end",
 		L"#import",
+		L"#unimport",
 		L"#if",
 		L"#elif",
+		L"#prefix",
 		L"#else"
 	};
 

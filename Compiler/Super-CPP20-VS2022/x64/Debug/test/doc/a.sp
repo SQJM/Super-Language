@@ -18,8 +18,9 @@ typedef long int big_int
 #message "fdsg"
 #message "f"
 
-#import "[.]/dd.sdef"
+#import "./dd.sdef"
 #import ":std/dd.sdef"
+#import ":std/ddas.sdp"
 
 int a = 1
 #asm

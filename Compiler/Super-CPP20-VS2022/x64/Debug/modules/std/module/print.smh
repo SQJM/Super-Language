@@ -1,3 +1,0 @@
-module std.print
-
-export void print(int)

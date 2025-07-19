@@ -8,7 +8,7 @@ namespace Super::Compile::LexicalAnalysis
 	class ProcessingPreprocessing
 	{
 	public:
-		ProcessingPreprocessing(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens);
+		ProcessingPreprocessing(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens, std::wstring parentFile = L"");
 
 	private:
 	};

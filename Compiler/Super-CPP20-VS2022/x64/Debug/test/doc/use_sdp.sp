@@ -1,5 +1,5 @@
-#import_sdp "./tool.sdp"
-import std
+#import "./tool.sdp"
+import ":std"
 
 int main()
 {

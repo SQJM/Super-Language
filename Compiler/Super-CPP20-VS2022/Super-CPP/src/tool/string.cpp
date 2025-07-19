@@ -137,4 +137,34 @@ namespace Super::Tool::String
 		}
 		return L"";
 	}
+
+	void ReplaceAll(std::wstring& str, const std::wstring& from, const std::wstring& to)
+	{
+		if (from.empty()) return;
+		size_t start_pos = 0;
+		while ((start_pos = str.find(from, start_pos)) != std::wstring::npos)
+		{
+			str.replace(start_pos, from.length(), to);
+			start_pos += to.length(); // 防止无限循环
+		}
+	}
+
+	std::wstring UnifyLineEndings(const std::wstring& fileData)
+	{
+		std::wstring unifiedFileData = fileData;
+
+		// 替换 \r\n 为 \n
+		size_t pos = 0;
+		while ((pos = unifiedFileData.find(L"\r\n", pos)) != std::wstring::npos)
+		{
+			unifiedFileData.replace(pos, 2, L"\n");
+			pos += 1; // 跳过新插入的 \n
+		}
+
+		// 替换单独的 \r 为 \n
+		std::replace(unifiedFileData.begin(), unifiedFileData.end(), L'\r', L'\n');
+
+		return unifiedFileData;
+	}
+
 }

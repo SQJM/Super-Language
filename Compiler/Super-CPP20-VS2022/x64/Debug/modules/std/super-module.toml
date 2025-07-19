@@ -2,3 +2,6 @@
 id="super-std"
 name="std"
 version="1.0.0"
+
+[ProjectImportPathStringMacro]
+"[module]"="[root]/modules/std/module"

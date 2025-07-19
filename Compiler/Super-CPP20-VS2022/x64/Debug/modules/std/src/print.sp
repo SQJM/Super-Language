@@ -1,6 +1,6 @@
-module std.print
+import "[module]/print.spm"
 
-void print(int)
+void std::print(int)
 {
 
 }
