@@ -15,14 +15,16 @@ namespace Super::Compile::LexicalAnalysis
 		std::wstring name;
 	};
 
-	static void ClearNullToken(std::vector<Super::Type::Token> &tokens)
+	static void ClearNullToken(std::vector<Super::Type::Token>& tokens)
 	{
-		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token &token)
-									{ return token.name == Super::Type::TokenName::Null; }),
+		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token& token)
+									{
+										return token.name == Super::Type::TokenName::Null;
+									}),
 					 tokens.end());
 	}
 
-	static void SetNull(std::vector<size_t> arr, std::vector<Super::Type::Token> &tokens)
+	static void SetNull(std::vector<size_t> arr, std::vector<Super::Type::Token>& tokens)
 	{
 		for (size_t i = 0; i < arr.size(); i++)
 		{
@@ -30,7 +32,7 @@ namespace Super::Compile::LexicalAnalysis
 		}
 	}
 
-	ProcessingPreprocessing::ProcessingPreprocessing(const std::wstring &inputFilePath, std::vector<Super::Type::Token> &tokens, std::wstring parentFile = L"")
+	ProcessingPreprocessing::ProcessingPreprocessing(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens, std::wstring parentFile)
 	{
 		for (size_t i = 0; i < tokens.size(); i++)
 		{
@@ -66,7 +68,7 @@ namespace Super::Compile::LexicalAnalysis
 				{
 					SUPER_ERROR_THROW_CODE(inputFilePath, L"000070", nextToken)
 				}
-				SetNull({i, i + 1}, tokens);
+				SetNull({ i, i + 1 }, tokens);
 				bool isModulePath = false;
 				if (file.at(0) == L':')
 				{
@@ -79,17 +81,15 @@ namespace Super::Compile::LexicalAnalysis
 					file = filePath.parent_path().wstring() + file.substr(1);
 				}
 				Super::Project::ReplaceImportPathString(file, isModulePath);
-				Super::Compile::GlobalData::SDEF[inputFilePath];
 				if (token.value == L"#import")
 				{
 					if (Super::Compile::GlobalData::SDEF.find(inputFilePath) == Super::Compile::GlobalData::SDEF.end())
 					{
-						Super::Compile::GlobalData::SDEF[inputFilePath] =
-							Super::Compile::SDEF::AnalysisSDEFFile(file, inputFilePath).GetDefineList();
+						Super::Compile::SDEF::AnalysisSDEFFile(file, inputFilePath);
 					}
 					for (const auto& pair : Super::Compile::GlobalData::SDEF[inputFilePath])
 					{
-						Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define[pair.first] = pair.second;
+						Super::Compile::GlobalData::FileCompileDataList[parentFile].Define[pair.first] = pair.second;
 					}
 				}
 				else if (token.value == L"#unimport")
@@ -100,15 +100,26 @@ namespace Super::Compile::LexicalAnalysis
 					}
 					for (const auto& pair : Super::Compile::GlobalData::SDEF[inputFilePath])
 					{
-						Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define.erase(pair.first);
+						Super::Compile::GlobalData::FileCompileDataList[parentFile].Define.erase(pair.first);
 					}
 				}
 			}
 			else if (token.value == L"#define")
 			{
+				if (i + 2 < tokens.size() && tokens[i + 2].name == Super::Type::TokenName::DefineValue)
+				{
+					Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define[nextToken.value] = tokens[i + 2].value;
+					SetNull({ i, i + 1, i + 2 }, tokens);
+				}
+				else
+				{
+					Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define[nextToken.value] = L"";
+					SetNull({ i, i + 1 }, tokens);
+				}
 			}
 			else if (token.value == L"#ifdef")
 			{
+
 			}
 			else if (token.value == L"#ifndef")
 			{
@@ -124,7 +135,7 @@ namespace Super::Compile::LexicalAnalysis
 					SUPER_ERROR_THROW_CODE(inputFilePath, L"000060", nextToken)
 				}
 				std::wcerr << "ERROR: " << Super::Tool::String::RemoveFirstAndLastChar(nextToken.value) << std::endl;
-				SetNull({i, i + 1}, tokens);
+				SetNull({ i, i + 1 }, tokens);
 			}
 			else if (token.value == L"#message")
 			{
@@ -133,7 +144,7 @@ namespace Super::Compile::LexicalAnalysis
 					SUPER_ERROR_THROW_CODE(inputFilePath, L"000080", nextToken)
 				}
 				std::wcout << "MESSAGE: " << Super::Tool::String::RemoveFirstAndLastChar(nextToken.value) << std::endl;
-				SetNull({i, i + 1}, tokens);
+				SetNull({ i, i + 1 }, tokens);
 			}
 			else if (token.value == L"#elif" || token.value == L"#else" || token.value == L"#endif")
 			{

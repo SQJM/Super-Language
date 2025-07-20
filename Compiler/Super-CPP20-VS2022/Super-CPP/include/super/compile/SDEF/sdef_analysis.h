@@ -10,7 +10,6 @@ namespace Super::Compile::SDEF
 	{
 	public:
 		AnalysisSDEFFile(const std::wstring& importFilePath, const std::wstring& inputFilePath);
-		std::unordered_map<std::wstring, std::wstring> GetDefineList();
 	private:
 		std::wstring _importFilePath;
 		std::vector<Super::Type::Token> _tokens;

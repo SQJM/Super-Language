@@ -43,9 +43,4 @@ namespace Super::Compile::SDEF
 
 		std::wcout << Super::Tool::String::TokenToString(_tokens) << std::endl;
 	}
-
-	std::unordered_map<std::wstring, std::wstring> AnalysisSDEFFile::GetDefineList()
-	{
-		return std::unordered_map<std::wstring, std::wstring>();
-	}
 }
