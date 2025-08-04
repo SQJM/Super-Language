@@ -107,6 +107,19 @@ namespace Super::Tool::String
 		return true;
 	}
 
+	bool IsFirstNonWhitespaceChar(const std::wstring& str, wchar_t c)
+	{
+		for (wchar_t ch : str)
+		{
+			if (IsWhitespace(ch))
+			{
+				continue;
+			}
+			return ch == c;
+		}
+		return false;
+	}
+
 	std::string WStringToEncoded(const std::wstring& input, const char* toCode)
 	{
 		icu::UnicodeString ustr(input.c_str());

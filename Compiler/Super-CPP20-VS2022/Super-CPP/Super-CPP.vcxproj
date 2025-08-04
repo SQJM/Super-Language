@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\super\debug.h" />
     <ClInclude Include="include\super\compile\global_data.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\extract_token.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\parenthesis.h" />

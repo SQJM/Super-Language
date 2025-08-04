@@ -10,6 +10,7 @@ namespace Super::Compile::LexicalAnalysis
 	public:
 		ProcessingPreprocessing(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens, std::wstring parentFile = L"");
 
+		static void LogicalEndMatching(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens);
 	private:
 	};
 }

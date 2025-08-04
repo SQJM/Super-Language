@@ -34,6 +34,7 @@ namespace Super::Error
 		def("200050", "右中括号缺少匹配的左中括号"),
 
 		def("300000", "禁止 2 个文件之间互相导入"),
+		def("300010", "`#endif` 前面没有匹配的逻辑处理语句 `#if` | `#ifdef` | `#ifndef`"),
 
 		def("400000", "类型后面缺少名字"),
 		def("400010", "类型后面重复类型"),
@@ -42,19 +43,43 @@ namespace Super::Error
 		def("400040", "多个变量名"),
 		def("400050", "变量的声明不允许此符号"),
 		def("400060", "未知符号"),
-		def("400060", "未知 Token")
+		def("400060", "未知 Token"),
+
+		def("", "[null]")
 	};
 
-	void NewError(const std::wstring& file, const std::wstring& msg, const Super::Type::Token& token)
+	static std::wstring CreateErrorMessage(const std::wstring& file, const std::wstring& msg, const Super::Type::Token& token)
 	{
 		std::wstring head = std::to_wstring(token.line) + L":" + std::to_wstring(token.column) + L'│';
 		auto& lines = Super::Compile::GlobalData::FileDataList[file];
 		std::wstring body = lines[token.line - 1];
+		if (body[body.size() - 1] == L';')
+		{
+			body.erase(body.size() - 1, 1);
+		}
 		size_t width = head.size() + Super::Tool::String::GetDisplayLength(body.substr(0, token.column)) - 1;
 		std::wstring indicate(width, L'~');
 		indicate += L"^";
 
-		std::wcerr << head << body << L"\n" << indicate;
-		std::wcerr << L"\n" + msg + L"\nSuper " + Super::Info::Version << std::endl;
+		return head + body + L"\n" + indicate + L"\n" + msg;
+	}
+
+	void NewError(const std::wstring& file, const std::wstring& msg, const Super::Type::Token& token)
+	{
+		std::wcerr << CreateErrorMessage(file, msg, token);
+		std::wcerr << L"\nSuper " + Super::Info::Version << std::endl;
+	}
+
+	std::wstring _cacheError;
+
+	void CacheError(const std::wstring& file, const std::wstring& msg, const Super::Type::Token& token)
+	{
+		_cacheError += CreateErrorMessage(file, msg, token) + L"\n";
+	}
+
+	void CacheOut()
+	{
+		std::wcerr << _cacheError << L"Super " + Super::Info::Version << std::endl;
+		_cacheError = L"";
 	}
 }

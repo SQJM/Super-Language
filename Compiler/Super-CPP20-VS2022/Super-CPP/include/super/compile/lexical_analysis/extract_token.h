@@ -16,9 +16,9 @@ namespace Super::Compile::LexicalAnalysis
 		bool isDefineName = false;
 		bool isSetDefineName = false;
 		bool isLineToOneToken = false;
+		std::vector<int> currentLineTokens;
 
 		void AddTokens(size_t line, size_t column, Super::Type::TokenName& tokenName, std::wostringstream& value);
-		void ClearNullToken();
 		void ProcessStrings(size_t& l, size_t& i, const std::vector<wchar_t>& lineData, std::wostringstream& temp, const Super::Type::TokenName& tokenName) const;
 
 	public:

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <super/tool/string.h>
 #include <super/compile/global_data.h>
+#include <super/debug.h>
 
 namespace Super::Compile::LexicalAnalysis
 {
@@ -26,6 +27,7 @@ namespace Super::Compile::LexicalAnalysis
 				}
 				isLineToOneToken = true;
 				isDefineName = false;
+				tokenName = Super::Type::TokenName::DefineName;
 				goto end;
 			}
 			else if (isSetDefineName)
@@ -54,14 +56,12 @@ namespace Super::Compile::LexicalAnalysis
 				if (value == L"#define")
 				{
 					isDefineName = true;
-					goto end;
 				}
-				else if (
-					value == L"#undef" || value == L"#ifdef" || value == L"#ifndef")
+				else if ( value == L"#undef" || value == L"#ifdef" || value == L"#ifndef")
 				{
 					isSetDefineName = true;
-					goto end;
 				}
+				goto end;
 			}
 			else if (Super::Keyword::Contains(value, Super::Keyword::Modifier))
 			{
@@ -77,16 +77,10 @@ namespace Super::Compile::LexicalAnalysis
 			}
 		end:
 			tokens.emplace_back(line + 1, column, tokenName, value);
+			currentLineTokens.emplace_back(tokens.size() - 1);
 			tokenName = Super::Type::TokenName::None;
 			v.str(L"");
 		}
-	}
-
-	void ExtractToken::ClearNullToken()
-	{
-		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token &token)
-									{ return token.name == Super::Type::TokenName::Null; }),
-					 tokens.end());
 	}
 
 	void ExtractToken::ProcessStrings(size_t &l, size_t &i, const std::vector<wchar_t> &lineData, std::wostringstream &temp, const Super::Type::TokenName &tokenName) const
@@ -148,9 +142,11 @@ namespace Super::Compile::LexicalAnalysis
 
 			size_t lineLength = lineData.size();
 			lineData.emplace_back(L'\n');
+			currentLineTokens.clear();
 			for (size_t j = 0; j < lineLength; j++)
 			{
 				wchar_t c = lineData[j];
+
 				if (isLineToOneToken)
 				{
 					if (c == L'\\' && lineData[j + 1] == L'\n')
@@ -196,18 +192,28 @@ namespace Super::Compile::LexicalAnalysis
 					AddTokens(i, j, tokenName, temp);
 					continue;
 				}
-				else if (Super::Keyword::Contains(lineData[j], Super::Keyword::Symbols))
+				else if (Super::Keyword::Contains(c, Super::Keyword::Symbols))
 				{
 					AddTokens(i, j, tokenName, temp);
+					if (c == L';')
+					{
+						if (isLineToOneToken)
+						{
+							isLineToOneToken = false;
+							continue;
+						}
+					}
 					tokenName = Super::Type::TokenName::Symbols;
-					temp << c;
-					continue;
+					if (lineData[j + 1] == L'\n')
+					{
+						temp << c;
+						AddTokens(i, j, tokenName, temp);
+						continue;
+					}
 				}
-				else if (tokenName == Super::Type::TokenName::Symbols && !Super::Keyword::Contains(lineData[j], Super::Keyword::Symbols))
+				else if (tokenName == Super::Type::TokenName::Symbols && !Super::Keyword::Contains(c, Super::Keyword::Symbols))
 				{
 					AddTokens(i, j, tokenName, temp);
-					temp << c;
-					continue;
 				}
 
 				temp << c;
@@ -233,7 +239,7 @@ namespace Super::Compile::LexicalAnalysis
 				tokens[i] = Super::Type::GetNullToken();
 			}
 		}
-		ClearNullToken();
+		Super::Type::ClearNullToken(tokens);
 	}
 
 	std::vector<Super::Type::Token> ExtractToken::GetTokenStream() const

@@ -18,6 +18,7 @@ namespace Super::Tool::String
 	std::wstring TokenToString(const std::vector<Super::Type::Token>& tokens);
 	bool IsWhitespace(wchar_t c);
 	bool IsWhitespace(std::wstring str);
+	bool IsFirstNonWhitespaceCharSemicolon(const std::wstring& str, wchar_t c);
 	std::string WStringToEncoded(const std::wstring& input, const char* toCode);
 	size_t GetDisplayLength(const std::wstring& str);
 	std::wstring RemoveFirstAndLastChar(const std::wstring& str);

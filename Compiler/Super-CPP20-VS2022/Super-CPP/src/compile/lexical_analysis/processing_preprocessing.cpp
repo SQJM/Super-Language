@@ -6,6 +6,7 @@
 #include <super/compile/project_config.h>
 #include <filesystem>
 #include <super/compile/SDEF/sdef_analysis.h>
+#include <stack>
 
 namespace Super::Compile::LexicalAnalysis
 {
@@ -15,20 +16,62 @@ namespace Super::Compile::LexicalAnalysis
 		std::wstring name;
 	};
 
-	static void ClearNullToken(std::vector<Super::Type::Token>& tokens)
+	static void BatchProductionSetNull(bool boolean, std::vector<Super::Type::Token>& tokens, size_t i)
 	{
-		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token& token)
-									{
-										return token.name == Super::Type::TokenName::Null;
-									}),
-					 tokens.end());
+		int count = 1;
+		for (; i < tokens.size(); i++)
+		{
+			Super::Type::Token token = tokens[i];
+
+			if (token.value == L"#ifdef" || token.value == L"#ifndef" || token.value == L"#if")
+			{
+				count++;
+			}
+			else if (token.value == L"#endif")
+			{
+				count--;
+			}
+
+			if (!boolean || count == 0)
+			{
+				tokens[i] = Super::Type::GetNullToken();
+			}
+
+			if (count == 0)
+			{
+				tokens[i + 1] = Super::Type::GetNullToken();
+				break;
+			}
+		}
 	}
 
-	static void SetNull(std::vector<size_t> arr, std::vector<Super::Type::Token>& tokens)
+	static void LogicalRecursion(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens, size_t i)
 	{
-		for (size_t i = 0; i < arr.size(); i++)
+		Super::Type::Token token = tokens[i];
+		Super::Type::Token nextToken = tokens[i + 1];
+
+		bool isCondition = false;
+
+		if (token.value == L"#ifdef" || token.value == L"#ifndef")
 		{
-			tokens[arr[i]] = Super::Type::GetNullToken();
+			std::unordered_map<std::wstring, std::wstring>* ds = &Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define;
+			if (token.value == L"#ifdef")
+			{
+				isCondition = ds->find(nextToken.value) != ds->end();
+			}
+			else if (token.value == L"#ifndef")
+			{
+				isCondition = ds->find(nextToken.value) == ds->end();
+			}
+			ds = nullptr;
+			tokens[i] = Super::Type::GetNullToken();
+			tokens[i + 1] = Super::Type::GetNullToken();
+			tokens[i + 2] = Super::Type::GetNullToken();
+			BatchProductionSetNull(isCondition, tokens, i + 3);
+		}
+		else if (token.value == L"#if")
+		{
+			// == != > < >= <=
 		}
 	}
 
@@ -109,23 +152,15 @@ namespace Super::Compile::LexicalAnalysis
 				if (i + 2 < tokens.size() && tokens[i + 2].name == Super::Type::TokenName::DefineValue)
 				{
 					Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define[nextToken.value] = tokens[i + 2].value;
-					SetNull({ i, i + 1, i + 2 }, tokens);
 				}
 				else
 				{
 					Super::Compile::GlobalData::FileCompileDataList[inputFilePath].Define[nextToken.value] = L"";
-					SetNull({ i, i + 1 }, tokens);
 				}
 			}
-			else if (token.value == L"#ifdef")
+			else if (token.value == L"#ifdef" || token.value == L"#ifndef" || token.value == L"#if")
 			{
-
-			}
-			else if (token.value == L"#ifndef")
-			{
-			}
-			else if (token.value == L"#if")
-			{
+				LogicalRecursion(inputFilePath, tokens, i);
 			}
 			// TODO: 我希望如果开启 DEBUG 模式的话下面的输出可以带上 文件,行号
 			else if (token.value == L"#error")
@@ -156,5 +191,42 @@ namespace Super::Compile::LexicalAnalysis
 		// TODO: 如果编译信息宏被定义了，则不替换
 
 		ClearNullToken(tokens);
+	}
+
+	void ProcessingPreprocessing::LogicalEndMatching(const std::wstring& inputFilePath, std::vector<Super::Type::Token>& tokens)
+	{
+		std::stack<Super::Type::Token> stack;
+
+		for (const auto& token : tokens)
+		{
+			const std::wstring& str = token.value;
+
+			if (str == L"#endif")
+			{
+				if (stack.empty())
+				{
+					SUPER_ERROR_THROW_CODE(inputFilePath, L"300010", token);
+				}
+				else
+				{
+					stack.pop();
+				}
+			}
+			else if (str == L"#ifdef" || str == L"#ifndef" || str == L"#if")
+			{
+				stack.push(token);
+			}
+		}
+
+		if (!stack.empty())
+		{
+			while (!stack.empty())
+			{
+				const auto& token = stack.top();
+				SUPER_ERROR_CODE_CACHE(inputFilePath, L"", token);
+				stack.pop();
+			}
+			SUPER_ERROR_CACHE_OUT
+		}
 	}
 }

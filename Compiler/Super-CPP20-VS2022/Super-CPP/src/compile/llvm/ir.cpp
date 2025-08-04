@@ -37,6 +37,8 @@ namespace Super::Compile::LLVM
 
 		// 括号匹配
 		Super::Compile::LexicalAnalysis::Parenthesis(_inputFilePath, tokens);
+		//std::wcout << Super::Tool::String::TokenToString(tokens) << std::endl;
+		Super::Compile::LexicalAnalysis::ProcessingPreprocessing::LogicalEndMatching(_inputFilePath, tokens);
 
 		// 预处理指令处理
 		Super::Compile::LexicalAnalysis::ProcessingPreprocessing(_inputFilePath, tokens);

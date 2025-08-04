@@ -85,6 +85,7 @@ e2
 #undef am
 
 #define a
+#define b
 
 #ifdef am
 string ddaaaa = "gf"

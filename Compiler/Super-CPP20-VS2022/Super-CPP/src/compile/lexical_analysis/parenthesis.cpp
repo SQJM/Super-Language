@@ -35,11 +35,6 @@ namespace Super::Compile::LexicalAnalysis
 				}
 				else
 				{
-					auto &expected = bracketPairs[str];
-					if (stack.top().value != expected)
-					{
-						SUPER_ERROR_THROW_CODE(inputFilePath, errorMessages[str], token);
-					}
 					stack.pop();
 				}
 			}
@@ -54,10 +49,10 @@ namespace Super::Compile::LexicalAnalysis
 			while (!stack.empty())
 			{
 				const auto &token = stack.top();
-				SUPER_ERROR_CODE(inputFilePath, errorMessages[token.value], token);
+				SUPER_ERROR_CODE_CACHE(inputFilePath, errorMessages[token.value], token);
 				stack.pop();
 			}
-			exit(0);
+			SUPER_ERROR_CACHE_OUT
 		}
 	}
 

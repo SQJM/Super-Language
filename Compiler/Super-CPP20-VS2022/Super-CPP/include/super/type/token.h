@@ -28,4 +28,21 @@ namespace Super::Type
 	{
 		return Token(0, 0, TokenName::Null, L"");
 	}
+
+	inline void ClearNullToken(std::vector<Super::Type::Token>& tokens)
+	{
+		tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](const Super::Type::Token& token)
+									{
+										return token.name == Super::Type::TokenName::Null;
+									}),
+					 tokens.end());
+	}
+
+	inline void SetNull(std::vector<size_t> arr, std::vector<Super::Type::Token>& tokens)
+	{
+		for (size_t i = 0; i < arr.size(); i++)
+		{
+			tokens[arr[i]] = Super::Type::GetNullToken();
+		}
+	}
 }
