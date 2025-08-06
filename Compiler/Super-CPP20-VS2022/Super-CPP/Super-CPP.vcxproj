@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\super\compile\expression_parser\compile_depth_recognizer.h" />
+    <ClInclude Include="include\super\compile\expression_parser\compile_time_operator.h" />
+    <ClInclude Include="include\super\compile\expression_parser\arithmometer.h" />
+    <ClInclude Include="include\super\compile\expression_parser\base_arithmetic_unit.h" />
+    <ClInclude Include="include\super\compile\expression_parser\boolean_arithmetic_unit.h" />
+    <ClInclude Include="include\super\compile\expression_parser\expression_parser.h" />
+    <ClInclude Include="include\super\compile\expression_parser\target_recognizer.h" />
     <ClInclude Include="include\super\debug.h" />
     <ClInclude Include="include\super\compile\global_data.h" />
     <ClInclude Include="include\super\compile\lexical_analysis\extract_token.h" />
@@ -38,11 +45,19 @@
     <ClInclude Include="include\super\tool\log.h" />
     <ClInclude Include="include\super\tool\string.h" />
     <ClInclude Include="include\super\type\ast.h" />
+    <ClInclude Include="include\super\type\expression_parser_type.h" />
     <ClInclude Include="include\super\type\token.h" />
     <ClInclude Include="include\super\type\token_grammar_name.h" />
     <ClInclude Include="include\super\type\token_group.h" />
     <ClInclude Include="include\super\type\token_grup_name.h" />
     <ClInclude Include="include\super\type\token_name.h" />
+    <ClInclude Include="src\compile\expression_parser\arithmometer.cpp" />
+    <ClInclude Include="src\compile\expression_parser\base_arithmetic_unit.cpp" />
+    <ClInclude Include="src\compile\expression_parser\boolean_arithmetic_unit.cpp" />
+    <ClInclude Include="src\compile\expression_parser\compile_depth_recognizer.cpp" />
+    <ClInclude Include="src\compile\expression_parser\compile_time_operator.cpp" />
+    <ClInclude Include="src\compile\expression_parser\expression_parser.cpp" />
+    <ClInclude Include="src\compile\expression_parser\target_recognizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\compile\SDEF\sdef_analysis.cpp" />
