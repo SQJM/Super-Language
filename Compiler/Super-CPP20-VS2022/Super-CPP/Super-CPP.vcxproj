@@ -46,6 +46,7 @@
     <ClInclude Include="include\super\tool\string.h" />
     <ClInclude Include="include\super\type\ast.h" />
     <ClInclude Include="include\super\type\expression_parser_type.h" />
+    <ClInclude Include="include\super\type\super_var.h" />
     <ClInclude Include="include\super\type\token.h" />
     <ClInclude Include="include\super\type\token_grammar_name.h" />
     <ClInclude Include="include\super\type\token_group.h" />

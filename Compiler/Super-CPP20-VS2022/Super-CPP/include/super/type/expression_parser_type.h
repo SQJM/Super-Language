@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <vector>
+#include <super/type/super_var.h>
+#include <variant>
 
 namespace Super::Type::ExpressionParser
 {
@@ -20,7 +22,7 @@ namespace Super::Type::ExpressionParser
 	struct Unit
 	{
 		size_t id;
-		wchar_t value;
+		std::wstring value;
 		UnitType type;
 	};
 
@@ -50,33 +52,78 @@ namespace Super::Type::ExpressionParser
 		add_assignment  // +=
 	};
 
+	enum class ComparisonOperatorSymbol
+	{
+		equal,          // ==
+		not_equal,      // !=
+		greater,        // >
+		less,           // <
+		greater_equal,  // >=
+		less_equal,     // <=
+		logical_and,    // &&
+		logical_or      // ||
+	};
+
 	struct OperationUnit
 	{
 		size_t index;
 		std::vector<Unit> left;
-		bool target_left;
-		OperationSymbol up_target;
+		bool target_left; // 使用上一个计算结果作为左值
+		OperationSymbol up_target; // 上级运算符
 		std::vector<Unit> right;
 		OperationSymbol os;
 	};
 
-	enum class ResultType
+	struct ExpressionQueue
 	{
-		Byte,
-		Char,
-		Wchar,
-		Short,
-		Int,
-		Half,
-		Float,
-		Double,
-		UserDefine
+		// 正常计算队列
+		std::stack<Super::Type::ExpressionParser::OperationUnit> _normalQueue;
+		// 乘除队列
+		std::stack<Super::Type::ExpressionParser::OperationUnit> _multiplyDivideQueue;
+		// 括号队列
+		std::stack<Super::Type::ExpressionParser::OperationUnit> _bracketQueue;
 	};
 
-	struct Result
+	struct Expression
 	{
-		ResultType rt;
-		std::wstring user_define_type;
-		void* value = nullptr; // 指向实际值的指针
+	private:
+		enum class DataType
+		{
+			Queue,
+			Symbol
+		};
+
+		std::vector<std::variant<ExpressionQueue, ComparisonOperatorSymbol>> data;
+
+	public:
+		void addQueue(ExpressionQueue value)
+		{
+			data.emplace_back(value);
+		}
+
+		void addSymbol(ComparisonOperatorSymbol value)
+		{
+			data.emplace_back(value);
+		}
+
+		void printData() const
+		{
+			for (const auto& item : data)
+			{
+				std::visit(
+					[](auto&& arg)
+					{
+						using T = std::decay_t<decltype(arg)>;
+						if constexpr (std::is_same_v<T, ExpressionQueue>)
+						{
+							;
+						}
+						else if constexpr (std::is_same_v<T, ComparisonOperatorSymbol>)
+						{
+							;
+						}
+					}, item);
+			}
+		}
 	};
 }

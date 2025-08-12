@@ -14,11 +14,6 @@ namespace Super::Compile::ExpressionParser
 	private:
 		std::wstring _inputFilePath;
 
-		// 正常计算队列
-		std::stack<Super::Type::ExpressionParser::OperationUnit> _normalQueue;
-		// 乘除队列
-		std::stack<Super::Type::ExpressionParser::OperationUnit> _multiplyDivideQueue;
-		// 括号队列
-		std::stack<Super::Type::ExpressionParser::OperationUnit> _bracketQueue;
+		Super::Type::ExpressionParser::Expression _expression;
 	};
 }

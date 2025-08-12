@@ -24,7 +24,8 @@ namespace Super::Keyword
 		L"async",
 		L"inline",
 		L"const",
-		L"unsigned"
+		L"unsigned",
+		L"signed"
 	};
 
 	// 其他关键字
